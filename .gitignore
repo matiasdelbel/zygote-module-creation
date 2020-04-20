@@ -1,0 +1,14 @@
+# Generated files
+bin/
+gen/
+build/
+out/
+
+# Log Files
+*.log
+
+/.idea
+/**/*.iml
+
+# MAC Files
+/**/.DS_Store
