@@ -2,6 +2,7 @@ package com.delbel.zygote.writer
 
 import com.delbel.zygote.feature.module.GitIgnore
 import com.delbel.zygote.feature.module.ProGuard
+import com.delbel.zygote.feature.module.SourceMain
 import com.delbel.zygote.feature.module.SourceTest
 import java.io.File
 
@@ -12,6 +13,12 @@ class FileModuleWriter(parent: File) : ModuleWriter<File>(parent) {
 
     override fun visit(gitIgnore: GitIgnore) =
         copy(originPath = ROUTE_TO_GIT_IGNORE_ORIGIN, destinationRelativePath = gitIgnore.name)
+
+    override fun visit(sourceMain: SourceMain) {
+        // Source
+        var folder = File(parent, sourceMain.sourcePath()).also { file -> file.mkdirs() }
+        sourceMain.packages().forEach { folder = File(folder, it).also { file -> file.mkdir() } }
+    }
 
     override fun visit(sourceTest: SourceTest) {
         // Source

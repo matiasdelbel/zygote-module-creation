@@ -2,6 +2,7 @@ package com.delbel.zygote.writer
 
 import com.delbel.zygote.feature.module.GitIgnore
 import com.delbel.zygote.feature.module.ProGuard
+import com.delbel.zygote.feature.module.SourceMain
 import com.delbel.zygote.feature.module.SourceTest
 import java.lang.StringBuilder
 
@@ -17,6 +18,13 @@ class StringModuleWriter(parent: String) : ModuleWriter<String>(parent) {
     override fun visit(gitIgnore: GitIgnore) {
         featureBuilder.appendln()
         featureBuilder.append("${parent}/${gitIgnore.name}")
+    }
+
+    override fun visit(sourceMain: SourceMain) {
+        featureBuilder.appendln()
+        var sourcePath = sourceMain.sourcePath()
+        sourceMain.packages().forEach { sourcePath = "$sourcePath/$it" }
+        featureBuilder.append("${parent}/$sourcePath")
     }
 
     override fun visit(sourceTest: SourceTest) {
