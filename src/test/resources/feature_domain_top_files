@@ -1,4 +1,5 @@
 > feature
+
 > feature/domain
 > feature/domain/proguard-rules.pro
 > feature/domain/.gitignore

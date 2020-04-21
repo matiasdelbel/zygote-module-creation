@@ -2,6 +2,7 @@ package com.delbel.zygote.feature
 
 import com.delbel.zygote.feature.module.GitIgnore
 import com.delbel.zygote.feature.module.ProGuard
+import com.delbel.zygote.feature.module.SourceTest
 import com.delbel.zygote.writer.Writeable
 import com.delbel.zygote.writer.Writer
 
@@ -9,7 +10,8 @@ class Module(
     private val parent: String,
     private val name: String,
     private val proGuard: ProGuard? = null,
-    private val gitIgnore: GitIgnore? = null
+    private val gitIgnore: GitIgnore? = null,
+    private val sourceTest: SourceTest? = null
 ) : Writeable {
 
     override fun <T> create(writer: Writer<T>) {
@@ -17,6 +19,7 @@ class Module(
 
         proGuard?.create(moduleWriter)
         gitIgnore?.create(moduleWriter)
+        sourceTest?.create(moduleWriter)
 
         // TODO append on settings.gradle.kts the module
     }

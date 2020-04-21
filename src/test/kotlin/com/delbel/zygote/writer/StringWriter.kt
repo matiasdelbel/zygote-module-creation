@@ -17,6 +17,7 @@ class StringWriter(root: String) : Writer<String>(root) {
         val absolutePath = "${root}${module.path()}"
 
         featureBuilder.appendln()
+        featureBuilder.appendln()
         featureBuilder.append(absolutePath)
 
         moduleWriter = StringModuleWriter(parent = absolutePath)

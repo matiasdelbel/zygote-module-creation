@@ -2,6 +2,7 @@ package com.delbel.zygote.feature
 
 import com.delbel.zygote.feature.module.GitIgnore
 import com.delbel.zygote.feature.module.ProGuard
+import com.delbel.zygote.feature.module.SourceTest
 import com.delbel.zygote.writer.StringWriter
 import org.hamcrest.CoreMatchers.`is` as isEqualTo
 import org.hamcrest.MatcherAssert.assertThat
@@ -44,6 +45,23 @@ class FeatureTest {
         feature.create(writer)
 
         assertThat(writer.test(), isEqualTo(readFromResource(expected = "/feature_domain_top_files")))
+    }
+
+    @Test
+    fun `create with domain module with test source set should write it down`() {
+        val writer = StringWriter(root = "> ")
+        val domain = Module(
+            parent = "feature",
+            name = "domain",
+            proGuard = ProGuard,
+            gitIgnore = GitIgnore,
+            sourceTest = SourceTest
+        )
+        val feature = Feature(name = "feature", modules = listOf(domain))
+
+        feature.create(writer)
+
+        assertThat(writer.test(), isEqualTo(readFromResource(expected = "/feature_domain_test_source_set")))
     }
 
     private fun readFromResource(expected: String) = FeatureTest::class.java.getResource(expected).readText()
