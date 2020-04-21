@@ -1,5 +1,7 @@
 package com.delbel.zygote.feature
 
+import com.delbel.zygote.feature.top.GitIgnore
+import com.delbel.zygote.feature.top.ProGuard
 import com.delbel.zygote.writer.StringWriter
 import org.hamcrest.CoreMatchers.`is` as isEqualTo
 import org.hamcrest.MatcherAssert.assertThat
@@ -10,8 +12,7 @@ class FeatureTest {
     @Test
     fun `create with root name feature should write it down`() {
         val writer = StringWriter(root = "> ")
-        val feature = Feature.Builder(name = "feature")
-            .build()
+        val feature = Feature(name = "feature")
 
         feature.create(writer)
 
@@ -21,10 +22,8 @@ class FeatureTest {
     @Test
     fun `create with domain module should write it down`() {
         val writer = StringWriter(root = "> ")
-        val domainModule = Module.Builder(name = "domain")
-        val feature = Feature.Builder(name = "feature")
-            .module(domainModule)
-            .build()
+        val domain = Module(parent = "feature", name = "domain")
+        val feature = Feature(name = "feature", modules = listOf(domain))
 
         feature.create(writer)
 
@@ -34,12 +33,13 @@ class FeatureTest {
     @Test
     fun `create with domain module with top files should write it down`() {
         val writer = StringWriter(root = "> ")
-        val domainModule = Module.Builder(name = "domain")
-            .withProguard()
-            .withGitIgnore()
-        val feature = Feature.Builder(name = "feature")
-            .module(domainModule)
-            .build()
+        val domain = Module(
+            parent = "feature",
+            name = "domain",
+            proGuard = ProGuard(parent = "feature/domain"),
+            gitIgnore = GitIgnore(parent = "feature/domain")
+        )
+        val feature = Feature(name = "feature", modules = listOf(domain))
 
         feature.create(writer)
 
