@@ -1,13 +1,15 @@
 package com.delbel.zygote
 
 import com.delbel.zygote.feature.Feature
+import com.delbel.zygote.feature.Module
 import com.delbel.zygote.writer.FileWriter
 import java.io.File
 import java.nio.file.Paths
 
 fun main(args: Array<String>) {
-    val feature = Feature.Builder()
-        .root("feature")
+    val domain = Module.Builder(name = "domain")
+    val feature = Feature.Builder(name = "feature")
+        .module(domain)
         .build()
     val writer = FileWriter(root = root())
 

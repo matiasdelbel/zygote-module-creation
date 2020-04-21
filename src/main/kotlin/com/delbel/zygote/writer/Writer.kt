@@ -1,8 +1,16 @@
 package com.delbel.zygote.writer
 
+import com.delbel.zygote.feature.Feature
+import com.delbel.zygote.feature.Module
+
 abstract class Writer<T>(protected val root: T) {
 
-    abstract fun addContainer(name: String)
+    abstract fun visit(feature: Feature)
 
-    abstract fun create(): T
+    abstract fun visit(module: Module)
+}
+
+interface Writeable {
+
+    fun <T> create(writer: Writer<T>)
 }
