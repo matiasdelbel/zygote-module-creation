@@ -3,5 +3,5 @@
 > feature/domain
 > feature/domain/proguard-rules.pro
 > feature/domain/.gitignore
-> feature/domain/test/src/kotlin
-> feature/domain/test/resources/mockito-extensions/org.mockito.plugins.MockMaker
+> feature/domain/src/test/kotlin/com/delbel/zygote
+> feature/domain/src/test/resources/mockito-extensions/org.mockito.plugins.MockMaker

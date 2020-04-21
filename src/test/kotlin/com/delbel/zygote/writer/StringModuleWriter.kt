@@ -21,7 +21,12 @@ class StringModuleWriter(parent: String) : ModuleWriter<String>(parent) {
 
     override fun visit(sourceTest: SourceTest) {
         featureBuilder.appendln()
-        featureBuilder.append("${parent}/${sourceTest.resourcesPath()}/mockito-extensions/org.mockito.plugins.MockMaker")
+        var sourcePath = sourceTest.sourcePath()
+        sourceTest.packages().forEach { sourcePath = "$sourcePath/$it" }
+        featureBuilder.append("${parent}/$sourcePath")
+
+        featureBuilder.appendln()
+        featureBuilder.append("${parent}/${sourceTest.mockMarkerPath()}")
     }
 
     fun test(): String = featureBuilder.toString()
