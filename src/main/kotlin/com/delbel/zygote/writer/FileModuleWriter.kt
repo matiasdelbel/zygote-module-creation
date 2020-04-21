@@ -9,14 +9,14 @@ class FileModuleWriter(parent: File) : ModuleWriter<File>(parent) {
 
     override fun visit(proguard: ProGuard) {
         val proGuardOrigin = readFromResource(file = ROUTE_TO_GIT_PRO_GUARD_ORIGIN)
-        val proGuardDestination = File(parent, PRO_GUARD_FILE_NAME)
+        val proGuardDestination = File(parent, proGuardOrigin.name)
 
         proGuardOrigin.copyTo(proGuardDestination, overwrite = true)
     }
 
     override fun visit(gitIgnore: GitIgnore) {
         val gitIgnoreOrigin = readFromResource(file = ROUTE_TO_GIT_IGNORE_ORIGIN)
-        val gitIgnoreDestination = File(parent, GIT_IGNORE_FILE_NAME)
+        val gitIgnoreDestination = File(parent, gitIgnore.name)
 
         gitIgnoreOrigin.copyTo(gitIgnoreDestination, overwrite = true)
     }
@@ -37,8 +37,6 @@ class FileModuleWriter(parent: File) : ModuleWriter<File>(parent) {
         private const val ROUTE_TO_GIT_IGNORE_ORIGIN = "/module/.gitignore"
         private const val ROUTE_TO_MOCK_MAKER_ORIGIN = "/module/org.mockito.plugins.MockMaker"
 
-        private const val PRO_GUARD_FILE_NAME = "proguard-rules.pro"
-        private const val GIT_IGNORE_FILE_NAME = ".gitignore"
         private const val MOCK_MAKER_FILE_NAME = "org.mockito.plugins.MockMaker"
     }
 }

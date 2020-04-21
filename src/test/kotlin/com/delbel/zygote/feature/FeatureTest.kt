@@ -29,7 +29,7 @@ class FeatureTest {
 
         feature.create(writer)
 
-        assertThat(writer.test(), isEqualTo(readFromResource(expected = "/feature_domain_top_files")))
+        assertThat(writer.test(), isEqualTo(readFromResource(expected = "/feature_domain")))
     }
 
     @Test
@@ -38,13 +38,13 @@ class FeatureTest {
         val domain = Module(
             parent = "feature",
             name = "domain",
-            sourceTest = SourceTest
+            sourceTest = SourceTest(packageName = "com.delbel.zygote")
         )
         val feature = Feature(name = "feature", modules = listOf(domain))
 
         feature.create(writer)
 
-        assertThat(writer.test(), isEqualTo(readFromResource(expected = "/feature_domain_test_source_set")))
+        assertThat(writer.test(), isEqualTo(readFromResource(expected = "/feature_domain_test_source")))
     }
 
     private fun readFromResource(expected: String) = FeatureTest::class.java.getResource(expected).readText()

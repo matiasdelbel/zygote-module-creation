@@ -11,12 +11,12 @@ class StringModuleWriter(parent: String) : ModuleWriter<String>(parent) {
 
     override fun visit(proguard: ProGuard) {
         featureBuilder.appendln()
-        featureBuilder.append("${parent}/proguard-rules.pro")
+        featureBuilder.append("${parent}/${proguard.name}")
     }
 
     override fun visit(gitIgnore: GitIgnore) {
         featureBuilder.appendln()
-        featureBuilder.append("${parent}/.gitignore")
+        featureBuilder.append("${parent}/${gitIgnore.name}")
     }
 
     override fun visit(sourceTest: SourceTest) {

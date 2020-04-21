@@ -11,7 +11,7 @@ fun main(args: Array<String>) {
     val domain = Module(
         parent = "feature",
         name = "domain",
-        sourceTest = SourceTest
+        sourceTest = SourceTest(packageName = "com.delbel.zygote")
     )
     val feature = Feature(
         name = "feature",

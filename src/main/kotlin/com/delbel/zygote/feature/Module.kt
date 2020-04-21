@@ -9,10 +9,11 @@ import com.delbel.zygote.writer.Writer
 class Module(
     private val parent: String,
     private val name: String,
-    private val proGuard: ProGuard = ProGuard,
-    private val gitIgnore: GitIgnore = GitIgnore,
     private val sourceTest: SourceTest? = null
 ) : Writeable {
+
+    private val proGuard = ProGuard()
+    private val gitIgnore = GitIgnore()
 
     override fun <T> create(writer: Writer<T>) {
         val moduleWriter = writer.visit(module = this)
