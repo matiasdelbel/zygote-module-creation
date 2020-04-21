@@ -2,6 +2,7 @@ package com.delbel.zygote.feature
 
 import com.delbel.zygote.feature.module.SourceMain
 import com.delbel.zygote.feature.module.SourceTest
+import com.delbel.zygote.feature.module.gradle.DomainBuildGradle
 import com.delbel.zygote.writer.StringWriter
 import org.hamcrest.CoreMatchers.`is` as isEqualTo
 import org.hamcrest.MatcherAssert.assertThat
@@ -24,6 +25,7 @@ class FeatureTest {
         val writer = StringWriter(root = "> ")
         val domain = Module(
             parent = "feature",
+            buildGradle = DomainBuildGradle(),
             name = "domain"
         )
         val feature = Feature(name = "feature", modules = listOf(domain))
@@ -39,6 +41,7 @@ class FeatureTest {
         val domain = Module(
             parent = "feature",
             name = "domain",
+            buildGradle = DomainBuildGradle(),
             sourceMain = SourceMain(packageName = "com.delbel.zygote")
         )
         val feature = Feature(name = "feature", modules = listOf(domain))
@@ -54,6 +57,7 @@ class FeatureTest {
         val domain = Module(
             parent = "feature",
             name = "domain",
+            buildGradle = DomainBuildGradle(),
             sourceTest = SourceTest(packageName = "com.delbel.zygote")
         )
         val feature = Feature(name = "feature", modules = listOf(domain))
@@ -69,6 +73,7 @@ class FeatureTest {
         val domain = Module(
             parent = "feature",
             name = "domain",
+            buildGradle = DomainBuildGradle(),
             sourceMain = SourceMain(packageName = "com.delbel.zygote"),
             sourceTest = SourceTest(packageName = "com.delbel.zygote")
         )
