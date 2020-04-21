@@ -15,7 +15,7 @@ class Feature private constructor(val name: String, private val modules: List<Mo
         private val modules = mutableListOf<Module>()
 
         fun module(module: Module.Builder): Builder {
-            module.parent(name)
+            module.withParent(name)
             modules.add(module.build())
 
             return this
