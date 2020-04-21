@@ -10,14 +10,26 @@ class FeatureTest {
     @Test
     fun `create with root name feature should write it down`() {
         val writer = StringWriter(root = "> ")
-        val feature = Feature.Builder()
-            .root(name = "feature")
+        val feature = Feature.Builder(name = "feature")
             .build()
 
-        val result = feature.create(writer)
+        feature.create(writer)
 
-        val expected = "> feature/"
-
-        assertThat(result, isEqualTo(expected))
+        assertThat(writer.test(), isEqualTo(readFromResource(expected = "/feature")))
     }
+
+    @Test
+    fun `create with domain module should write it down`() {
+        val writer = StringWriter(root = "> ")
+        val domainModule = Module.Builder(name = "domain")
+        val feature = Feature.Builder(name = "feature")
+            .module(domainModule)
+            .build()
+
+        feature.create(writer)
+
+        assertThat(writer.test(), isEqualTo(readFromResource(expected = "/feature_domain")))
+    }
+
+    private fun readFromResource(expected: String) = FeatureTest::class.java.getResource(expected).readText()
 }
