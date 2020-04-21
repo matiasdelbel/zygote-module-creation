@@ -1,0 +1,4 @@
+> feature
+    |_ domain
+        |_ proguard-rules.pro
+        |_ .gitignore

@@ -31,5 +31,20 @@ class FeatureTest {
         assertThat(writer.test(), isEqualTo(readFromResource(expected = "/feature_domain")))
     }
 
+    @Test
+    fun `create with domain module with top files should write it down`() {
+        val writer = StringWriter(root = "> ")
+        val domainModule = Module.Builder(name = "domain")
+            .withProguard()
+            .withGitIgnore()
+        val feature = Feature.Builder(name = "feature")
+            .module(domainModule)
+            .build()
+
+        feature.create(writer)
+
+        assertThat(writer.test(), isEqualTo(readFromResource(expected = "/feature_domain_top_files")))
+    }
+
     private fun readFromResource(expected: String) = FeatureTest::class.java.getResource(expected).readText()
 }

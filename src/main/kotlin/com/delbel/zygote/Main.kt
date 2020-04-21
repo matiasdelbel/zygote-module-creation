@@ -8,6 +8,8 @@ import java.nio.file.Paths
 
 fun main(args: Array<String>) {
     val domain = Module.Builder(name = "domain")
+        .withProguard()
+        .withGitIgnore()
     val feature = Feature.Builder(name = "feature")
         .module(domain)
         .build()
