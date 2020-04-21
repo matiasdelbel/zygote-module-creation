@@ -1,9 +1,6 @@
 package com.delbel.zygote.writer
 
-import com.delbel.zygote.feature.module.GitIgnore
-import com.delbel.zygote.feature.module.ProGuard
-import com.delbel.zygote.feature.module.SourceMain
-import com.delbel.zygote.feature.module.SourceTest
+import com.delbel.zygote.feature.module.*
 import java.io.File
 
 class FileModuleWriter(parent: File) : ModuleWriter<File>(parent) {
@@ -27,6 +24,11 @@ class FileModuleWriter(parent: File) : ModuleWriter<File>(parent) {
 
         // Mock marker
         copy(originPath = ROUTE_TO_MOCK_MAKER_ORIGIN, destinationRelativePath = sourceTest.mockMarkerPath())
+    }
+
+    override fun visit(manifest: Manifest) {
+        val manifestFile = File(parent, manifest.relativePath())
+        manifestFile.bufferedWriter().use { out -> out.write(manifest.asString()) }
     }
 
     private fun copy(originPath: String, destinationRelativePath: String) {

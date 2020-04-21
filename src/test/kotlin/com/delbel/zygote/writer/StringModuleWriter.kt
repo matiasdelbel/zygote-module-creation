@@ -1,9 +1,6 @@
 package com.delbel.zygote.writer
 
-import com.delbel.zygote.feature.module.GitIgnore
-import com.delbel.zygote.feature.module.ProGuard
-import com.delbel.zygote.feature.module.SourceMain
-import com.delbel.zygote.feature.module.SourceTest
+import com.delbel.zygote.feature.module.*
 import java.lang.StringBuilder
 
 class StringModuleWriter(parent: String) : ModuleWriter<String>(parent) {
@@ -35,6 +32,12 @@ class StringModuleWriter(parent: String) : ModuleWriter<String>(parent) {
 
         featureBuilder.appendln()
         featureBuilder.append("${parent}/${sourceTest.mockMarkerPath()}")
+    }
+
+    override fun visit(manifest: Manifest) {
+        featureBuilder.appendln()
+        featureBuilder.append("${parent}/${manifest.relativePath()}")
+        featureBuilder.append(" (package = ${manifest.packageName})")
     }
 
     fun test(): String = featureBuilder.toString()

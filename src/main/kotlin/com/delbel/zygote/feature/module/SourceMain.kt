@@ -5,7 +5,12 @@ import com.delbel.zygote.writer.ModuleWriter
 
 class SourceMain(private val packageName: String) : ModuleWriteable {
 
-    override fun <T> create(writer: ModuleWriter<T>) = writer.visit(sourceMain = this)
+    private val manifest = Manifest(packageName)
+
+    override fun <T> create(writer: ModuleWriter<T>) {
+        writer.visit(sourceMain = this)
+        manifest.create(writer)
+    }
 
     fun packages() = packageName.split(".")
 

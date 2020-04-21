@@ -4,3 +4,4 @@
 > feature/domain/proguard-rules.pro
 > feature/domain/.gitignore
 > feature/domain/src/main/kotlin/com/delbel/zygote
+> feature/domain/src/main/kotlin/AndroidManifest.xml (package = com.delbel.zygote)

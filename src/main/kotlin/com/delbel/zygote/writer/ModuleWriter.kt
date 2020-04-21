@@ -1,9 +1,6 @@
 package com.delbel.zygote.writer
 
-import com.delbel.zygote.feature.module.GitIgnore
-import com.delbel.zygote.feature.module.SourceTest
-import com.delbel.zygote.feature.module.ProGuard
-import com.delbel.zygote.feature.module.SourceMain
+import com.delbel.zygote.feature.module.*
 
 abstract class ModuleWriter<T>(protected val parent: T) {
 
@@ -14,6 +11,8 @@ abstract class ModuleWriter<T>(protected val parent: T) {
     abstract fun visit(sourceMain: SourceMain)
 
     abstract fun visit(sourceTest: SourceTest)
+
+    abstract fun visit(manifest: Manifest)
 }
 
 interface ModuleWriteable {
