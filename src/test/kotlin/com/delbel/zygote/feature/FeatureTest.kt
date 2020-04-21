@@ -1,7 +1,8 @@
 package com.delbel.zygote.feature
 
-import com.delbel.zygote.feature.module.SourceMain
-import com.delbel.zygote.feature.module.SourceTest
+import com.delbel.zygote.feature.module.Module
+import com.delbel.zygote.feature.module.source.SourceMain
+import com.delbel.zygote.feature.module.source.SourceTest
 import com.delbel.zygote.feature.module.gradle.DomainBuildGradle
 import com.delbel.zygote.writer.StringWriter
 import org.hamcrest.CoreMatchers.`is` as isEqualTo

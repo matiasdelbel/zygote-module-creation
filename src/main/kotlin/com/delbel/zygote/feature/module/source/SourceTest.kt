@@ -1,4 +1,4 @@
-package com.delbel.zygote.feature.module
+package com.delbel.zygote.feature.module.source
 
 import com.delbel.zygote.writer.ModuleWriteable
 import com.delbel.zygote.writer.ModuleWriter

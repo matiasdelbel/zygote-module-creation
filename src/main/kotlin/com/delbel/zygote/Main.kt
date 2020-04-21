@@ -1,11 +1,9 @@
 package com.delbel.zygote
 
 import com.delbel.zygote.feature.*
-import com.delbel.zygote.feature.module.SourceMain
-import com.delbel.zygote.feature.module.SourceTest
-import com.delbel.zygote.feature.module.gradle.DomainBuildGradle
-import com.delbel.zygote.feature.module.gradle.GatewayBuildGradle
-import com.delbel.zygote.feature.module.gradle.PresentationBuildGradle
+import com.delbel.zygote.feature.module.DomainModule
+import com.delbel.zygote.feature.module.GatewayModule
+import com.delbel.zygote.feature.module.PresentationModule
 import com.delbel.zygote.writer.FileWriter
 import java.io.File
 import java.nio.file.Paths

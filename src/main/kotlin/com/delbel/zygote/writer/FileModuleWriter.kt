@@ -1,6 +1,10 @@
 package com.delbel.zygote.writer
 
-import com.delbel.zygote.feature.module.*
+import com.delbel.zygote.feature.module.files.GitIgnore
+import com.delbel.zygote.feature.module.files.Manifest
+import com.delbel.zygote.feature.module.files.ProGuard
+import com.delbel.zygote.feature.module.source.SourceMain
+import com.delbel.zygote.feature.module.source.SourceTest
 import java.io.File
 
 class FileModuleWriter(parent: File) : ModuleWriter<File>(parent) {

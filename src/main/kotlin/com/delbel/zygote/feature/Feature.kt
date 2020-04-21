@@ -1,5 +1,6 @@
 package com.delbel.zygote.feature
 
+import com.delbel.zygote.feature.module.Module
 import com.delbel.zygote.writer.Writeable
 import com.delbel.zygote.writer.Writer
 

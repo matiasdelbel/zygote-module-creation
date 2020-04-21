@@ -1,7 +1,7 @@
 package com.delbel.zygote.writer
 
 import com.delbel.zygote.feature.Feature
-import com.delbel.zygote.feature.Module
+import com.delbel.zygote.feature.module.Module
 import java.io.File
 
 class FileWriter(root: File) : Writer<File>(root) {
