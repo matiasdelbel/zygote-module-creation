@@ -9,16 +9,16 @@ import com.delbel.zygote.writer.Writer
 class Module(
     private val parent: String,
     private val name: String,
-    private val proGuard: ProGuard? = null,
-    private val gitIgnore: GitIgnore? = null,
+    private val proGuard: ProGuard = ProGuard,
+    private val gitIgnore: GitIgnore = GitIgnore,
     private val sourceTest: SourceTest? = null
 ) : Writeable {
 
     override fun <T> create(writer: Writer<T>) {
         val moduleWriter = writer.visit(module = this)
 
-        proGuard?.create(moduleWriter)
-        gitIgnore?.create(moduleWriter)
+        proGuard.create(moduleWriter)
+        gitIgnore.create(moduleWriter)
         sourceTest?.create(moduleWriter)
 
         // TODO append on settings.gradle.kts the module

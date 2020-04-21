@@ -2,8 +2,6 @@ package com.delbel.zygote
 
 import com.delbel.zygote.feature.Feature
 import com.delbel.zygote.feature.Module
-import com.delbel.zygote.feature.module.GitIgnore
-import com.delbel.zygote.feature.module.ProGuard
 import com.delbel.zygote.feature.module.SourceTest
 import com.delbel.zygote.writer.FileWriter
 import java.io.File
@@ -13,8 +11,6 @@ fun main(args: Array<String>) {
     val domain = Module(
         parent = "feature",
         name = "domain",
-        proGuard = ProGuard, // TODO no deberia especificarlos
-        gitIgnore = GitIgnore, // TODO no deberia especificarlos
         sourceTest = SourceTest
     )
     val feature = Feature(

@@ -1,7 +1,5 @@
 package com.delbel.zygote.feature
 
-import com.delbel.zygote.feature.module.GitIgnore
-import com.delbel.zygote.feature.module.ProGuard
 import com.delbel.zygote.feature.module.SourceTest
 import com.delbel.zygote.writer.StringWriter
 import org.hamcrest.CoreMatchers.`is` as isEqualTo
@@ -23,22 +21,9 @@ class FeatureTest {
     @Test
     fun `create with domain module should write it down`() {
         val writer = StringWriter(root = "> ")
-        val domain = Module(parent = "feature", name = "domain")
-        val feature = Feature(name = "feature", modules = listOf(domain))
-
-        feature.create(writer)
-
-        assertThat(writer.test(), isEqualTo(readFromResource(expected = "/feature_domain")))
-    }
-
-    @Test
-    fun `create with domain module with top files should write it down`() {
-        val writer = StringWriter(root = "> ")
         val domain = Module(
             parent = "feature",
-            name = "domain",
-            proGuard = ProGuard,
-            gitIgnore = GitIgnore
+            name = "domain"
         )
         val feature = Feature(name = "feature", modules = listOf(domain))
 
@@ -53,8 +38,6 @@ class FeatureTest {
         val domain = Module(
             parent = "feature",
             name = "domain",
-            proGuard = ProGuard,
-            gitIgnore = GitIgnore,
             sourceTest = SourceTest
         )
         val feature = Feature(name = "feature", modules = listOf(domain))
