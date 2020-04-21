@@ -1,4 +1,4 @@
 > feature
-    |_ domain
-        |_ proguard-rules.pro
-        |_ .gitignore
+> feature/domain
+> feature/domain/proguard-rules.pro
+> feature/domain/.gitignore

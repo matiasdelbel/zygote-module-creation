@@ -2,32 +2,32 @@ package com.delbel.zygote.writer
 
 import com.delbel.zygote.feature.Feature
 import com.delbel.zygote.feature.Module
-import com.delbel.zygote.feature.top.GitIgnore
-import com.delbel.zygote.feature.top.ProGuard
 import java.lang.StringBuilder
 
 class StringWriter(root: String) : Writer<String>(root) {
 
     private val featureBuilder = StringBuilder().apply { append(root) }
+    private lateinit var moduleWriter: StringModuleWriter
 
     override fun visit(feature: Feature) {
         featureBuilder.append(feature.name)
     }
 
-    override fun visit(module: Module) {
+    override fun visit(module: Module): StringModuleWriter {
+        val absolutePath = "${root}${module.path()}"
+
         featureBuilder.appendln()
-        featureBuilder.append("    |_ ${module.name}")
+        featureBuilder.append(absolutePath)
+
+        moduleWriter = StringModuleWriter(parent = absolutePath)
+
+        return moduleWriter
     }
 
-    override fun visit(proguard: ProGuard) {
-        featureBuilder.appendln()
-        featureBuilder.append("        |_ proguard-rules.pro")
-    }
+    fun test(): String {
+        if (::moduleWriter.isInitialized)
+            featureBuilder.append(moduleWriter.test())
 
-    override fun visit(gitIgnore: GitIgnore) {
-        featureBuilder.appendln()
-        featureBuilder.append("        |_ .gitignore")
+        return featureBuilder.toString()
     }
-
-    fun test(): String = featureBuilder.toString()
 }

@@ -1,7 +1,7 @@
 package com.delbel.zygote.feature
 
-import com.delbel.zygote.feature.top.GitIgnore
-import com.delbel.zygote.feature.top.ProGuard
+import com.delbel.zygote.feature.module.GitIgnore
+import com.delbel.zygote.feature.module.ProGuard
 import com.delbel.zygote.writer.StringWriter
 import org.hamcrest.CoreMatchers.`is` as isEqualTo
 import org.hamcrest.MatcherAssert.assertThat
@@ -36,8 +36,8 @@ class FeatureTest {
         val domain = Module(
             parent = "feature",
             name = "domain",
-            proGuard = ProGuard(parent = "feature/domain"),
-            gitIgnore = GitIgnore(parent = "feature/domain")
+            proGuard = ProGuard,
+            gitIgnore = GitIgnore
         )
         val feature = Feature(name = "feature", modules = listOf(domain))
 
