@@ -35,10 +35,10 @@ class FileContentWriter(private val root: File) : ContentWriter {
 class LogContentWriter(private val root: File) : ContentWriter {
 
     override fun write(targetName: String, content: String) {
-        println("  NEW file: $root/$targetName (dynamic content)")
+        println(" NEW file: $root/$targetName (dynamic content)")
     }
 
     override fun copy(targetName: String, sourcePath: String) {
-        println("  NEW file: $root/$targetName (source: $sourcePath)")
+        println(" NEW file: $root/$targetName (source: $sourcePath)")
     }
 }

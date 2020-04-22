@@ -9,20 +9,22 @@ abstract class Source {
 
     protected abstract val manifest: ManifestFile?
 
-    abstract fun path(): String
+    abstract fun src(): String
+
+    abstract fun resources(): String
 
     fun write(containerWriter: ContainerWriter, contentWriter: ContentWriter, module: Module) {
         createPackagesDirectory(containerWriter = containerWriter, module = module)
 
         writeManifestIfNeed(contentWriter = contentWriter, module = module)
-        writeCustomContent(contentWriter = contentWriter)
+        writeCustomContent(contentWriter = contentWriter, module = module)
     }
 
     private fun createPackagesDirectory(containerWriter: ContainerWriter, module: Module) =
-        containerWriter.create(path = module.pathFor(source = this))
+        containerWriter.create(path = module.relativePathFor(source = this))
 
     private fun writeManifestIfNeed(contentWriter: ContentWriter, module: Module) =
         manifest?.write(contentWriter, module)
 
-    protected open fun writeCustomContent(contentWriter: ContentWriter) {}
+    protected open fun writeCustomContent(contentWriter: ContentWriter, module: Module) {}
 }

@@ -5,12 +5,14 @@ import com.delbel.zygote.writer.ContentWriter
 
 abstract class DynamicContent {
 
-    protected abstract val name: String
+    abstract val name: String
 
     fun write(writer: ContentWriter, module: Module) = writer.write(
-        targetName = name,
+        targetName = module.relativePathFor(file = this),
         content = module.contentFor(file = this)
     )
+
+    abstract fun pathIn(module: Module): String
 
     abstract fun content(module: Module): String
 }

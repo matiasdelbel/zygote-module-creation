@@ -6,5 +6,7 @@ class MainSource : Source() {
 
     override val manifest = ManifestFile()
 
-    override fun path() = "src/main/kotlin"
+    override fun src() = "src/main"
+
+    override fun resources() = "src/main/res"
 }

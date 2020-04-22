@@ -38,8 +38,8 @@ fun main(args: Array<String>) {
     )
 
     listOf(domain, presentation, gateway).forEach { module -> module.create(
-        containerWriter = DirectoryContainerWriter(root = File(featureFile, module.name)),
-        contentWriter = FileContentWriter(root = File(featureFile, module.name)))
+        containerWriter = DirectoryContainerWriter(root = featureFile),
+        contentWriter = FileContentWriter(root = featureFile))
     }
 }
 

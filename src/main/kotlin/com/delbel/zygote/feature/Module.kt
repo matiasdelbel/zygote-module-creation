@@ -3,6 +3,8 @@ package com.delbel.zygote.feature
 import com.delbel.zygote.feature.content.dynamic.*
 import com.delbel.zygote.feature.content.dynamic.gradle.GradleFile
 import com.delbel.zygote.feature.content.hard.GitIgnoreFile
+import com.delbel.zygote.feature.content.hard.HardContent
+import com.delbel.zygote.feature.content.hard.MockMarkerFile
 import com.delbel.zygote.feature.content.hard.ProGuardFile
 import com.delbel.zygote.feature.content.source.MainSource
 import com.delbel.zygote.feature.content.source.Source
@@ -23,19 +25,33 @@ class Module(
     private val sourceMain: MainSource = MainSource()
     private val sourceTest: TestSource = TestSource()
 
+    fun relativePathFor(file: HardContent) = file.pathIn(module = this)
+
+    fun relativePathFor(file: ProGuardFile) = "$name/${file.name}"
+
+    fun relativePathFor(file: GitIgnoreFile) = "$name/${file.name}"
+
+    fun relativePathFor(file: MockMarkerFile) = "${resourcesPathFor(sourceTest)}/${file.name}"
+
+    fun relativePathFor(file: DynamicContent) = file.pathIn(module = this)
+
+    fun relativePathFor(file: GradleFile) = "$name/${file.name}"
+
+    fun relativePathFor(file: ManifestFile) = "${srcPathFor(sourceMain)}/${file.name}"
+
+    fun relativePathFor(source: Source) = "$name/${source.src()}/kotlin/${feature.basePackage.split(".").joinToString("/")}/$name"
+
     fun contentFor(file: DynamicContent) = file.content(module = this)
 
-    fun contentFor(file: ManifestFile) = file.content(packageName = feature.packageNameFor(module = this))
+    fun contentFor(file: ManifestFile) = file.content(packageName = "${feature.basePackage}.${feature.name}.$name")
 
-    fun contentFor(file: GradleFile) = file.content(innerDependencies = innerDependencies.map {
-        feature.dependencyNameFor(module = this)
-    })
-
-    fun pathFor(source: Source) = feature.sourcePathFor(module = this, source = source)
+    fun contentFor(file: GradleFile) = file.content(innerDependencies = innerDependencies.map { ":${feature.name}:$name" })
 
     fun create(containerWriter: ContainerWriter, contentWriter: ContentWriter) {
-        proGuard.write(contentWriter)
-        gitIgnore.write(contentWriter)
+        containerWriter.create(name)
+
+        proGuard.write(contentWriter, module = this)
+        gitIgnore.write(contentWriter, module = this)
         buildGradle.write(contentWriter, module = this)
 
         sourceMain.write(containerWriter = containerWriter, contentWriter = contentWriter, module = this)
@@ -43,4 +59,8 @@ class Module(
 
         // TODO update settings file
     }
+
+    private fun resourcesPathFor(source: Source) = "$name/${source.resources()}"
+
+    private fun srcPathFor(source: Source) = "$name/${source.src()}"
 }
