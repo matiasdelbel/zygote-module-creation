@@ -1,11 +1,10 @@
 package com.delbel.zygote.feature.module
 
-import com.delbel.zygote.feature.module.files.GitIgnore
-import com.delbel.zygote.feature.module.files.ProGuard
+import com.delbel.zygote.feature.content.hard.GitIgnoreFile
+import com.delbel.zygote.feature.content.hard.ProGuardFile
 import com.delbel.zygote.feature.module.source.SourceMain
 import com.delbel.zygote.feature.module.source.SourceTest
 import com.delbel.zygote.feature.module.gradle.BuildGradle
-import com.delbel.zygote.feature.module.gradle.DomainBuildGradle
 import com.delbel.zygote.writer.Writeable
 import com.delbel.zygote.writer.Writer
 
@@ -15,17 +14,18 @@ abstract class Module(
     private val sourceTest: SourceTest? = null
 ) : Writeable {
 
-    private val proGuard = ProGuard()
-    private val gitIgnore = GitIgnore()
+    private val proGuard = ProGuardFile()
+    private val gitIgnore = GitIgnoreFile()
 
     protected abstract val buildGradle: BuildGradle
 
     override fun <T> create(writer: Writer<T>) {
-        val moduleWriter = writer.visit(module = this)
+        val (moduleWriter, staticWriter) = writer.visit(module = this)
 
-        proGuard.create(moduleWriter)
-        gitIgnore.create(moduleWriter)
         buildGradle.create(moduleWriter)
+
+        proGuard.write(staticWriter)
+        gitIgnore.write(staticWriter)
 
         sourceMain?.create(moduleWriter)
         sourceTest?.create(moduleWriter)

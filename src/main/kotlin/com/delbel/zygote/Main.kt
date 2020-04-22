@@ -4,7 +4,7 @@ import com.delbel.zygote.feature.*
 import com.delbel.zygote.feature.module.DomainModule
 import com.delbel.zygote.feature.module.GatewayModule
 import com.delbel.zygote.feature.module.PresentationModule
-import com.delbel.zygote.writer.FileWriter
+import com.delbel.zygote.writer.FileWriterDeprecated
 import java.io.File
 import java.nio.file.Paths
 
@@ -14,7 +14,7 @@ fun main(args: Array<String>) {
     val presentation = PresentationModule(dependencies = listOf(domain))
     val feature = Feature(modules = listOf(domain, gateway, presentation))
 
-    val writer = FileWriter(featureName = "feature", packageName = "com.delbel.zygote", root = root())
+    val writer = FileWriterDeprecated(featureName = "feature", packageName = "com.delbel.zygote", root = root())
 
     feature.create(writer)
 }

@@ -1,8 +1,6 @@
 package com.delbel.zygote.writer
 
-import com.delbel.zygote.feature.module.files.GitIgnore
 import com.delbel.zygote.feature.module.files.Manifest
-import com.delbel.zygote.feature.module.files.ProGuard
 import com.delbel.zygote.feature.module.gradle.DomainBuildGradle
 import com.delbel.zygote.feature.module.gradle.GatewayBuildGradle
 import com.delbel.zygote.feature.module.gradle.PresentationBuildGradle
@@ -11,12 +9,6 @@ import com.delbel.zygote.feature.module.source.SourceTest
 import java.io.File
 
 class FileModuleWriter(moduleFolder: File, packageName: String) : ModuleWriter<File>(moduleFolder, packageName) {
-
-    override fun visit(proguard: ProGuard) =
-        copy(originPath = ROUTE_TO_GIT_PRO_GUARD_ORIGIN, destinationRelativePath = proguard.name)
-
-    override fun visit(gitIgnore: GitIgnore) =
-        copy(originPath = ROUTE_TO_GIT_IGNORE_ORIGIN, destinationRelativePath = gitIgnore.name)
 
     override fun visit(sourceMain: SourceMain) {
         // Source
@@ -32,7 +24,8 @@ class FileModuleWriter(moduleFolder: File, packageName: String) : ModuleWriter<F
         packagesSplit.forEach { folder = File(folder, it).also { file -> file.mkdir() } } // TODO falta el feature name y layer
 
         // Mock marker
-        copy(originPath = ROUTE_TO_MOCK_MAKER_ORIGIN, destinationRelativePath = sourceTest.mockMarkerPath())
+        val staticContentWriter = FileHardContentWriter(module = moduleContainer)
+        sourceTest.mockMarkerFile.write(staticContentWriter)
     }
 
     override fun visit(manifest: Manifest) {
@@ -63,10 +56,4 @@ class FileModuleWriter(moduleFolder: File, packageName: String) : ModuleWriter<F
     }
 
     private fun readFromResource(file: String) = File(ModuleWriter::class.java.getResource(file).toURI())
-
-    companion object {
-        private const val ROUTE_TO_GIT_PRO_GUARD_ORIGIN = "/module/proguard-rules.pro"
-        private const val ROUTE_TO_GIT_IGNORE_ORIGIN = "/module/.gitignore"
-        private const val ROUTE_TO_MOCK_MAKER_ORIGIN = "/module/org.mockito.plugins.MockMaker"
-    }
 }

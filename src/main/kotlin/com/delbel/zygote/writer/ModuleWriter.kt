@@ -1,8 +1,6 @@
 package com.delbel.zygote.writer
 
-import com.delbel.zygote.feature.module.files.GitIgnore
 import com.delbel.zygote.feature.module.files.Manifest
-import com.delbel.zygote.feature.module.files.ProGuard
 import com.delbel.zygote.feature.module.gradle.DomainBuildGradle
 import com.delbel.zygote.feature.module.gradle.GatewayBuildGradle
 import com.delbel.zygote.feature.module.gradle.PresentationBuildGradle
@@ -10,10 +8,6 @@ import com.delbel.zygote.feature.module.source.SourceMain
 import com.delbel.zygote.feature.module.source.SourceTest
 
 abstract class ModuleWriter<T>(protected val moduleContainer: T, protected val packageName: String) {
-
-    abstract fun visit(proguard: ProGuard)
-
-    abstract fun visit(gitIgnore: GitIgnore)
 
     abstract fun visit(sourceMain: SourceMain)
 

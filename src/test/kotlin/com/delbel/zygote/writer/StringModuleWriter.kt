@@ -1,8 +1,6 @@
 package com.delbel.zygote.writer
 
-import com.delbel.zygote.feature.module.files.GitIgnore
 import com.delbel.zygote.feature.module.files.Manifest
-import com.delbel.zygote.feature.module.files.ProGuard
 import com.delbel.zygote.feature.module.gradle.DomainBuildGradle
 import com.delbel.zygote.feature.module.gradle.GatewayBuildGradle
 import com.delbel.zygote.feature.module.gradle.PresentationBuildGradle
@@ -13,16 +11,6 @@ import java.lang.StringBuilder
 class StringModuleWriter(parent: String) : ModuleWriter<String>(parent, "") {
 
     private val featureBuilder = StringBuilder()
-
-    override fun visit(proguard: ProGuard) {
-        featureBuilder.appendln()
-        featureBuilder.append("${moduleContainer}/${proguard.name}")
-    }
-
-    override fun visit(gitIgnore: GitIgnore) {
-        featureBuilder.appendln()
-        featureBuilder.append("${moduleContainer}/${gitIgnore.name}")
-    }
 
     override fun visit(sourceMain: SourceMain) {
         featureBuilder.appendln()
@@ -38,7 +26,7 @@ class StringModuleWriter(parent: String) : ModuleWriter<String>(parent, "") {
         featureBuilder.append("${moduleContainer}/$sourcePath")
 
         featureBuilder.appendln()
-        featureBuilder.append("${moduleContainer}/${sourceTest.mockMarkerPath()}")
+        //featureBuilder.append("${moduleContainer}/${sourceTest.mockMarkerPath()}")
     }
 
     override fun visit(manifest: Manifest) {
