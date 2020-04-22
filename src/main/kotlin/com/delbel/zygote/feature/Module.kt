@@ -11,9 +11,8 @@ import com.delbel.zygote.writer.ContainerWriter
 import com.delbel.zygote.writer.ContentWriter
 
 class Module(
-    val feature: String,
     val name: String,
-    val packageName: String,
+    private val feature: Feature,
     private val buildGradle: GradleFile,
     private val innerDependencies: List<Module> = emptyList()
 ) {
@@ -26,18 +25,24 @@ class Module(
 
     fun contentFor(file: DynamicContent) = file.content(module = this)
 
-    fun contentFor(file: ManifestFile) = file.content(packageName = "$packageName.$feature.$name")
+    fun contentFor(file: ManifestFile) = file.content(packageName = feature.packageNameFor(module = this))
 
-    fun contentFor(file: GradleFile) = file.content(innerDependencies = innerDependencies.map { "${it.feature}:${it.name}" })
+    fun contentFor(file: GradleFile) = file.content(innerDependencies = innerDependencies.map {
+        feature.dependencyNameFor(module = this)
+    })
 
-    fun pathFor(source: Source) = "${source.path()}${packageName.split(".").joinToString("/")}"
+    fun pathFor(source: Source) = feature.sourcePathFor(module = this, source = source)
 
     fun create(containerWriter: ContainerWriter, contentWriter: ContentWriter) {
+        containerWriter.create(name)
+
         proGuard.write(contentWriter)
         gitIgnore.write(contentWriter)
         buildGradle.write(contentWriter, module = this)
 
         sourceMain.write(containerWriter = containerWriter, contentWriter = contentWriter, module = this)
         sourceTest.write(containerWriter = containerWriter, contentWriter = contentWriter, module = this)
+
+        // TODO update settings file
     }
 }

@@ -2,16 +2,14 @@ package com.delbel.zygote.writer
 
 import java.io.File
 
-abstract class ContentWriter(protected val root: File) {
+interface ContentWriter {
 
-    abstract fun write(targetName: String, content: String)
+    fun write(targetName: String, content: String)
 
-    abstract fun copy(targetName: String, sourcePath: String)
-
-    abstract fun clone(subPath: String): ContentWriter
+    fun copy(targetName: String, sourcePath: String)
 }
 
-class FileContentWriter(root: File) : ContentWriter(root) {
+class FileContentWriter(private val root: File) : ContentWriter {
 
     override fun write(targetName: String, content: String) {
         val buildGradleFile = File(root, targetName)
@@ -24,8 +22,6 @@ class FileContentWriter(root: File) : ContentWriter(root) {
 
         origin.copyTo(destination, overwrite = true)
     }
-
-    override fun clone(subPath: String) = FileContentWriter(root = File(root, subPath))
 
     private fun readFromResource(file: String) = File(ContentWriter::class.java.getResource(file).toURI())
 }

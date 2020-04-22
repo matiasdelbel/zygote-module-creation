@@ -10,7 +10,7 @@ class TestSource : Source() {
 
     private val mockMarkerFile = MockMarkerFile()
 
-    override fun path() = "src/test/kotlin/"
+    override fun path() = "src/test/kotlin"
 
     override fun writeCustomContent(contentWriter: ContentWriter) = mockMarkerFile.write(contentWriter)
 }

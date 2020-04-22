@@ -2,18 +2,14 @@ package com.delbel.zygote.writer
 
 import java.io.File
 
-abstract class ContainerWriter(protected val root: File) {
+interface ContainerWriter {
 
-    abstract fun create(path: String)
-
-    abstract fun clone(subPath: String): ContainerWriter
+    fun create(path: String)
 }
 
-class DirectoryContainerWriter(root: File) : ContainerWriter(root) {
+class DirectoryContainerWriter(private val root: File) : ContainerWriter {
 
     override fun create(path: String) {
         File(root, path).mkdirs()
     }
-
-    override fun clone(subPath: String) = DirectoryContainerWriter(root = File(root, subPath))
 }

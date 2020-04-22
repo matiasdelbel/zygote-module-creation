@@ -1,16 +1,15 @@
 package com.delbel.zygote.feature
 
-import com.delbel.zygote.writer.*
+import com.delbel.zygote.feature.content.source.Source
 
-class Feature(private val name: String, private val modules: List<Module> = emptyList()) {
+data class Feature(private val name: String, private val basePackage: String) {
 
-    fun create(containerWriter: ContainerWriter, contentWriter: FileContentWriter) {
-        containerWriter.create(name)
-        // TODO update settings file
+    fun packageNameFor(module: Module) =
+        "$basePackage.$name.${module.name}"
 
-        modules.forEach { module ->
-            val modulePath = "$name/${module.name}"
-            module.create(containerWriter.clone(subPath = modulePath), contentWriter.clone(subPath = modulePath))
-        }
-    }
+    fun dependencyNameFor(module: Module) =
+        ":$name:${module.name}"
+
+    fun sourcePathFor(module: Module, source: Source) =
+        "${source.path()}/${basePackage.split(".").joinToString("/")}/${module.name}"
 }

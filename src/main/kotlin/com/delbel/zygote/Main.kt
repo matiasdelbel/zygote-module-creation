@@ -11,29 +11,34 @@ import java.io.File
 import java.nio.file.Paths
 
 fun main(args: Array<String>) {
+    val featureName = "feature"
+    val featurePackage = "com.delbel.zygote"
+
+    val feature = Feature(name = featureName, basePackage = featurePackage)
+    val featureFile = File(root(), featureName)
+
     val domain = Module(
-        feature = "feature",
         name = "domain",
-        packageName = "com.delbel.zygote",
+        feature = feature,
         buildGradle = DomainGradleFile()
     )
     val gateway = Module(
-        feature = "feature",
         name = "gateway",
-        packageName = "com.delbel.zygote",
+        feature = feature,
         buildGradle = GatewayGradleFile(),
         innerDependencies = listOf(domain)
     )
     val presentation = Module(
-        feature = "feature",
         name = "presentation",
-        packageName = "com.delbel.zygote",
+        feature = feature,
         buildGradle = PresentationGradleFile(),
         innerDependencies = listOf(domain)
     )
-    val feature = Feature(name = "feature", modules = listOf(domain, gateway, presentation))
 
-    feature.create(DirectoryContainerWriter(root = root()), FileContentWriter(root = root()))
+    listOf(domain, presentation, gateway).forEach { module -> module.create(
+        containerWriter = DirectoryContainerWriter(root = featureFile),
+        contentWriter = FileContentWriter(root = featureFile))
+    }
 }
 
 private fun root(): File {
