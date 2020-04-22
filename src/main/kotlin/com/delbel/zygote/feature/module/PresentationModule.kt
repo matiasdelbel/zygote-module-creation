@@ -12,5 +12,5 @@ class PresentationModule(dependencies: List<Module> = emptyList(), packageName: 
     sourceTest = SourceTest(),
     dependencies = dependencies
 ) {
-    override val buildGradle2 = PresentationGradleFile()
+    override val buildGradle = PresentationGradleFile()
 }

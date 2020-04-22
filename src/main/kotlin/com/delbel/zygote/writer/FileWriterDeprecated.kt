@@ -19,8 +19,6 @@ class FileWriterDeprecated(featureName: String, packageName: String, root: File)
         val contentWriter = FileContentWriter(module = moduleFolder)
         val moduleWriter = FileModuleWriter(moduleFolder, packageName, module, contentWriter)
 
-        module.buildGradle2?.write(contentWriter, module)
-
         return Pair(moduleWriter, contentWriter)
     }
 

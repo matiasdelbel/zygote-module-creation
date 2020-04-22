@@ -1,6 +1,6 @@
 package com.delbel.zygote.feature.module
 
-import com.delbel.zygote.feature.module.gradle.GatewayBuildGradle
+import com.delbel.zygote.feature.content.dynamic.GatewayGradleFile
 import com.delbel.zygote.feature.module.source.SourceMain
 import com.delbel.zygote.feature.module.source.SourceTest
 
@@ -12,5 +12,5 @@ class GatewayModule(dependencies: List<Module> = emptyList(), packageName: Strin
     sourceTest = SourceTest(),
     dependencies = dependencies
 ) {
-    override val buildGradle = GatewayBuildGradle(dependencies)
+    override val buildGradle = GatewayGradleFile()
 }

@@ -3,7 +3,7 @@ package com.delbel.zygote.feature.content.dynamic
 import com.delbel.zygote.feature.module.Module
 import java.lang.StringBuilder
 
-class PresentationGradleFile : DynamicContent() {
+class GatewayGradleFile : DynamicContent() {
 
     override val name: String = "build.gradle.kts"
 
@@ -15,8 +15,6 @@ class PresentationGradleFile : DynamicContent() {
         fileBuilder.appendln("    id(\"com.android.library\")")
         fileBuilder.appendln("    id(\"project-module-plugin\")")
         fileBuilder.appendln("}")
-        fileBuilder.appendln()
-        fileBuilder.appendln("android { viewBinding { isEnabled = true } }")
         fileBuilder.appendln()
         fileBuilder.appendln("dependencies {")
         innerDependencies.forEach {
