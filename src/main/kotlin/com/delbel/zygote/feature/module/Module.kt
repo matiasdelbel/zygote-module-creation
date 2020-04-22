@@ -1,50 +1,47 @@
 package com.delbel.zygote.feature.module
 
 import com.delbel.zygote.feature.content.dynamic.*
-import com.delbel.zygote.feature.content.dynamic.gradle.DomainGradleFile
-import com.delbel.zygote.feature.content.dynamic.gradle.GatewayGradleFile
 import com.delbel.zygote.feature.content.dynamic.gradle.GradleFile
-import com.delbel.zygote.feature.content.dynamic.gradle.PresentationGradleFile
 import com.delbel.zygote.feature.content.hard.GitIgnoreFile
 import com.delbel.zygote.feature.content.hard.ProGuardFile
-import com.delbel.zygote.feature.module.source.SourceMain
-import com.delbel.zygote.feature.module.source.SourceTest
-import com.delbel.zygote.writer.Writeable
-import com.delbel.zygote.writer.Writer
+import com.delbel.zygote.feature.content.source.MainSource
+import com.delbel.zygote.feature.content.source.Source
+import com.delbel.zygote.feature.content.source.TestSource
+import com.delbel.zygote.writer.ContainerWriter
+import com.delbel.zygote.writer.ContentWriter
 
 class Module(
     val feature: String,
     val name: String,
     val packageName: String,
     private val buildGradle: GradleFile,
-    private val dependencies: List<Module> = emptyList(),
-
-    private val sourceMain: SourceMain? = SourceMain(),
-    private val sourceTest: SourceTest? = SourceTest()
-) : Writeable {
+    private val innerDependencies: List<Module> = emptyList()
+) {
 
     private val proGuard = ProGuardFile()
     private val gitIgnore = GitIgnoreFile()
 
-    fun visit(file: DynamicContent): String = file.accept(module = this)
+    private val sourceMain: MainSource = MainSource()
+    private val sourceTest: TestSource = TestSource()
 
-    fun visit(file: ManifestFile): String = file.content(packageName = "$packageName.$feature.$name")
+    fun visit(file: DynamicContent): String =
+        file.accept(module = this)
 
-    fun visit(file: GradleFile): String = file.content(innerDependencies = dependencies.map { "$feature:${it.name}" })
+    fun visit(file: ManifestFile): String =
+        file.content(packageName = "$packageName.$feature.$name")
 
-    // TODO all deprecated
+    fun visit(file: GradleFile): String =
+        file.content(innerDependencies = innerDependencies.map { "$feature:${it.name}" })
 
-    override fun <T> create(writer: Writer<T>) {
-        val (moduleWriter, staticWriter) = writer.visit(module = this)
+    fun visit(source: Source): String =
+        "${source.path(module = this)}${packageName.split(".").joinToString("/")}"
 
-        proGuard.write(staticWriter)
-        gitIgnore.write(staticWriter)
+    fun create(containerWriter: ContainerWriter, contentWriter: ContentWriter) {
+        proGuard.write(contentWriter)
+        gitIgnore.write(contentWriter)
+        buildGradle.write(contentWriter, module = this)
 
-        buildGradle.write(staticWriter, this)
-
-        sourceMain?.create(moduleWriter)
-        sourceTest?.create(moduleWriter)
-
-        // TODO append on settings.gradle.kts the module
+        sourceMain.write(containerWriter = containerWriter, contentWriter = contentWriter, module = this)
+        sourceTest.write(containerWriter = containerWriter, contentWriter = contentWriter, module = this)
     }
 }

@@ -3,7 +3,7 @@ package com.delbel.zygote.writer
 import com.delbel.zygote.feature.Feature
 import com.delbel.zygote.feature.module.Module
 import java.lang.StringBuilder
-
+/*
 class StringWriter(root: String) : Writer<String>(root, "", root= "") {
 
     private val featureBuilder = StringBuilder().apply { append(root) }
@@ -35,4 +35,4 @@ class StringWriter(root: String) : Writer<String>(root, "", root= "") {
     override fun visit(module: Module): Pair<ModuleWriter<String>, ContentWriter> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
-}
+}*/

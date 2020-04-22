@@ -5,7 +5,6 @@ import com.delbel.zygote.feature.content.dynamic.gradle.DomainGradleFile
 import com.delbel.zygote.feature.content.dynamic.gradle.GatewayGradleFile
 import com.delbel.zygote.feature.content.dynamic.gradle.PresentationGradleFile
 import com.delbel.zygote.feature.module.Module
-import com.delbel.zygote.writer.FileWriterDeprecated
 import java.io.File
 import java.nio.file.Paths
 
@@ -21,23 +20,17 @@ fun main(args: Array<String>) {
         name = "gateway",
         packageName = "com.delbel.zygote",
         buildGradle = GatewayGradleFile(),
-        dependencies = listOf(domain))
+        innerDependencies = listOf(domain))
     val presentation = Module(
         feature = "feature",
         name = "presentation",
         packageName = "com.delbel.zygote",
         buildGradle = PresentationGradleFile(),
-        dependencies = listOf(domain))
+        innerDependencies = listOf(domain))
 
-    val feature = Feature(modules = listOf(domain, gateway, presentation))
+    val feature = Feature(modules = listOf(domain, gateway, presentation), root = root())
 
-    val writer = FileWriterDeprecated(
-        featureName = "feature",
-        packageName = "com.delbel.zygote",
-        root = root()
-    )
-
-    feature.create(writer)
+    feature.create()
 }
 
 private fun root(): File {

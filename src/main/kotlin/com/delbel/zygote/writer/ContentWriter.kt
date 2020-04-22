@@ -23,5 +23,5 @@ class FileContentWriter(private val module: File) : ContentWriter {
         origin.copyTo(destination, overwrite = true)
     }
 
-    private fun readFromResource(file: String) = File(ModuleWriter::class.java.getResource(file).toURI())
+    private fun readFromResource(file: String) = File(ContentWriter::class.java.getResource(file).toURI())
 }
