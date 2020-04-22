@@ -1,6 +1,5 @@
 package com.delbel.zygote.writer
 
-import com.delbel.zygote.feature.module.gradle.DomainBuildGradle
 import com.delbel.zygote.feature.module.gradle.GatewayBuildGradle
 import com.delbel.zygote.feature.module.gradle.PresentationBuildGradle
 import com.delbel.zygote.feature.module.source.SourceMain
@@ -29,9 +28,6 @@ class StringModuleWriter(parent: String) : ModuleWriter<String>(parent, "") {
     }
 
     fun test(): String = featureBuilder.toString()
-    override fun visit(buildGradle: DomainBuildGradle) {
-        TODO("not implemented")
-    }
 
     override fun visit(buildGradle: GatewayBuildGradle) {
         TODO("not implemented")

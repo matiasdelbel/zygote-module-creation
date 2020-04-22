@@ -1,7 +1,6 @@
 package com.delbel.zygote.writer
 
 import com.delbel.zygote.feature.content.dynamic.ContentContext
-import com.delbel.zygote.feature.module.gradle.DomainBuildGradle
 import com.delbel.zygote.feature.module.gradle.GatewayBuildGradle
 import com.delbel.zygote.feature.module.gradle.PresentationBuildGradle
 import com.delbel.zygote.feature.module.source.SourceMain
@@ -33,9 +32,6 @@ class FileModuleWriter(
         // Mock marker
         sourceTest.mockMarkerFile.write(contentWriter)
     }
-
-    override fun visit(buildGradle: DomainBuildGradle) =
-        contentWriter.write(buildGradle.relativePath(), content = buildGradle.asString())
 
     override fun visit(buildGradle: GatewayBuildGradle) =
         contentWriter.write(buildGradle.relativePath(), content = buildGradle.asString(packageName))

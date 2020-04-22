@@ -6,5 +6,7 @@ data class ContentContext(private val feature: String, private val module: Strin
 
     fun visit(content: ManifestFile): String = content.content(packageName = modulePackage())
 
+    fun visit(content: DomainGradleFile): String = content.content()
+
     private fun modulePackage() = "$packageName.$feature.$module"
 }
