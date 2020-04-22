@@ -1,6 +1,5 @@
 package com.delbel.zygote.writer
 
-import com.delbel.zygote.feature.module.files.Manifest
 import com.delbel.zygote.feature.module.gradle.DomainBuildGradle
 import com.delbel.zygote.feature.module.gradle.GatewayBuildGradle
 import com.delbel.zygote.feature.module.gradle.PresentationBuildGradle
@@ -12,8 +11,6 @@ abstract class ModuleWriter<T>(protected val moduleContainer: T, protected val p
     abstract fun visit(sourceMain: SourceMain)
 
     abstract fun visit(sourceTest: SourceTest)
-
-    abstract fun visit(manifest: Manifest)
 
     abstract fun visit(buildGradle: DomainBuildGradle)
 

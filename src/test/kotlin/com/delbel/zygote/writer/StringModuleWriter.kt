@@ -1,6 +1,5 @@
 package com.delbel.zygote.writer
 
-import com.delbel.zygote.feature.module.files.Manifest
 import com.delbel.zygote.feature.module.gradle.DomainBuildGradle
 import com.delbel.zygote.feature.module.gradle.GatewayBuildGradle
 import com.delbel.zygote.feature.module.gradle.PresentationBuildGradle
@@ -27,12 +26,6 @@ class StringModuleWriter(parent: String) : ModuleWriter<String>(parent, "") {
 
         featureBuilder.appendln()
         //featureBuilder.append("${moduleContainer}/${sourceTest.mockMarkerPath()}")
-    }
-
-    override fun visit(manifest: Manifest) {
-        featureBuilder.appendln()
-        featureBuilder.append("${moduleContainer}/${manifest.relativePath()}")
-        //featureBuilder.append(" (package = ${manifest.packageName})")
     }
 
     fun test(): String = featureBuilder.toString()
