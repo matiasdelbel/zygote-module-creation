@@ -1,5 +1,6 @@
 package com.delbel.zygote.writer
 
+import com.github.ajalt.clikt.output.TermUi.echo
 import java.io.File
 
 interface ContainerWriter {
@@ -21,6 +22,6 @@ class DirectoryContainerWriter(private val root: File) : ContainerWriter {
 class LogContainerWriter(private val root: File) : ContainerWriter {
 
     override fun create(path: String) {
-        println("DIRECTORY: $root/$path")
+        echo(message = "DIRECTORY: $root/$path")
     }
 }
