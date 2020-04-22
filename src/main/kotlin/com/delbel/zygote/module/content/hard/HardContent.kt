@@ -1,6 +1,6 @@
-package com.delbel.zygote.feature.content.hard
+package com.delbel.zygote.module.content.hard
 
-import com.delbel.zygote.feature.Module
+import com.delbel.zygote.module.Module
 import com.delbel.zygote.writer.ContentWriter
 
 abstract class HardContent {

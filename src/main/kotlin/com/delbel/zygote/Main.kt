@@ -1,23 +1,18 @@
 package com.delbel.zygote
 
-import com.delbel.zygote.feature.*
-import com.delbel.zygote.feature.content.dynamic.gradle.DomainGradleFile
-import com.delbel.zygote.feature.content.dynamic.gradle.GatewayGradleFile
-import com.delbel.zygote.feature.content.dynamic.gradle.PresentationGradleFile
-import com.delbel.zygote.feature.Module
+import com.delbel.zygote.module.*
+import com.delbel.zygote.module.content.dynamic.gradle.DomainGradleFile
+import com.delbel.zygote.module.content.dynamic.gradle.GatewayGradleFile
+import com.delbel.zygote.module.content.dynamic.gradle.PresentationGradleFile
+import com.delbel.zygote.module.Module
 import com.delbel.zygote.writer.DirectoryContainerWriter
 import com.delbel.zygote.writer.FileContentWriter
-import com.delbel.zygote.writer.LogContainerWriter
-import com.delbel.zygote.writer.LogContentWriter
 import java.io.File
 import java.nio.file.Paths
 
 fun main(args: Array<String>) {
-    val featureName = "feature"
-    val featurePackage = "com.delbel.zygote"
-
-    val feature = Feature(name = featureName, basePackage = featurePackage)
-    val featureFile = File(root(), featureName)
+    val feature = Feature(name = "feature", basePackage = "com.delbel.zygote")
+    val featureFile = File(root(), "feature")
 
     val domain = Module(
         name = "domain",

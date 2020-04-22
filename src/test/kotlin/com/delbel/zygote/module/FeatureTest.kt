@@ -1,4 +1,4 @@
-package com.delbel.zygote.feature
+package com.delbel.zygote.module
 
 class FeatureTest {
 

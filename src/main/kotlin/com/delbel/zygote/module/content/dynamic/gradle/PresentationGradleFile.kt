@@ -1,9 +1,9 @@
-package com.delbel.zygote.feature.content.dynamic.gradle
+package com.delbel.zygote.module.content.dynamic.gradle
 
-import com.delbel.zygote.feature.Module
+import com.delbel.zygote.module.Module
 import java.lang.StringBuilder
 
-class DomainGradleFile : GradleFile() {
+class PresentationGradleFile : GradleFile() {
 
     override val name: String = "build.gradle.kts"
 
@@ -15,6 +15,9 @@ class DomainGradleFile : GradleFile() {
         fileBuilder.appendln("    id(\"com.android.library\")")
         fileBuilder.appendln("    id(\"project-module-plugin\")")
         fileBuilder.appendln("}")
+        fileBuilder.appendln()
+        fileBuilder.appendln("android { viewBinding { isEnabled = true } }")
+        fileBuilder.appendln()
         if (innerDependencies.isNotEmpty()) {
             fileBuilder.appendln("dependencies {")
             innerDependencies.forEach { fileBuilder.appendln("    implementation(project(path = \"$it))") }

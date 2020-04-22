@@ -1,7 +1,7 @@
-package com.delbel.zygote.feature.content.dynamic.gradle
+package com.delbel.zygote.module.content.dynamic.gradle
 
-import com.delbel.zygote.feature.Module
-import com.delbel.zygote.feature.content.dynamic.DynamicContent
+import com.delbel.zygote.module.Module
+import com.delbel.zygote.module.content.dynamic.DynamicContent
 
 abstract class GradleFile : DynamicContent() {
 

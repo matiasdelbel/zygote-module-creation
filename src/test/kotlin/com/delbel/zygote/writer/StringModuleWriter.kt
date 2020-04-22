@@ -1,8 +1,5 @@
 package com.delbel.zygote.writer
 
-import com.delbel.zygote.feature.content.source.MainSource
-import com.delbel.zygote.feature.content.source.TestSource
-import java.lang.StringBuilder
 /*
 class StringModuleWriter(parent: String) : ModuleWriter<String>(parent, "") {
 

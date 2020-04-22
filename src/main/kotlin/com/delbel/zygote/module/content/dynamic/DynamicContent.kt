@@ -1,6 +1,6 @@
-package com.delbel.zygote.feature.content.dynamic
+package com.delbel.zygote.module.content.dynamic
 
-import com.delbel.zygote.feature.Module
+import com.delbel.zygote.module.Module
 import com.delbel.zygote.writer.ContentWriter
 
 abstract class DynamicContent {

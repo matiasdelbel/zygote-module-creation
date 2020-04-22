@@ -1,8 +1,8 @@
-package com.delbel.zygote.feature.content.source
+package com.delbel.zygote.module.content.source
 
-import com.delbel.zygote.feature.Module
-import com.delbel.zygote.feature.content.dynamic.ManifestFile
-import com.delbel.zygote.feature.content.hard.MockMarkerFile
+import com.delbel.zygote.module.Module
+import com.delbel.zygote.module.content.dynamic.ManifestFile
+import com.delbel.zygote.module.content.hard.MockMarkerFile
 import com.delbel.zygote.writer.ContentWriter
 
 class TestSource : Source() {

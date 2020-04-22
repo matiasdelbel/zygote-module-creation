@@ -1,14 +1,14 @@
-package com.delbel.zygote.feature
+package com.delbel.zygote.module
 
-import com.delbel.zygote.feature.content.dynamic.*
-import com.delbel.zygote.feature.content.dynamic.gradle.GradleFile
-import com.delbel.zygote.feature.content.hard.GitIgnoreFile
-import com.delbel.zygote.feature.content.hard.HardContent
-import com.delbel.zygote.feature.content.hard.MockMarkerFile
-import com.delbel.zygote.feature.content.hard.ProGuardFile
-import com.delbel.zygote.feature.content.source.MainSource
-import com.delbel.zygote.feature.content.source.Source
-import com.delbel.zygote.feature.content.source.TestSource
+import com.delbel.zygote.module.content.dynamic.*
+import com.delbel.zygote.module.content.dynamic.gradle.GradleFile
+import com.delbel.zygote.module.content.hard.GitIgnoreFile
+import com.delbel.zygote.module.content.hard.HardContent
+import com.delbel.zygote.module.content.hard.MockMarkerFile
+import com.delbel.zygote.module.content.hard.ProGuardFile
+import com.delbel.zygote.module.content.source.MainSource
+import com.delbel.zygote.module.content.source.Source
+import com.delbel.zygote.module.content.source.TestSource
 import com.delbel.zygote.writer.ContainerWriter
 import com.delbel.zygote.writer.ContentWriter
 

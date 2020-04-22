@@ -1,3 +1,3 @@
-package com.delbel.zygote.feature
+package com.delbel.zygote.module
 
 data class Feature(val name: String, val basePackage: String)
