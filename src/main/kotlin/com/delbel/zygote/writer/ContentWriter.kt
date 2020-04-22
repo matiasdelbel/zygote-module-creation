@@ -1,8 +1,9 @@
 package com.delbel.zygote.writer
 
 import com.github.ajalt.clikt.output.TermUi.echo
-import java.io.File
-import java.io.FileOutputStream
+import java.io.*
+import java.nio.file.Files
+import java.nio.file.StandardCopyOption
 
 interface ContentWriter {
 
@@ -27,10 +28,12 @@ class FileContentWriter(private val root: File) : ContentWriter {
     override fun copy(targetName: String, sourcePath: String) {
         logger.copy(targetName, sourcePath)
 
-        val origin = readFromResource(file = sourcePath)
+        val sourceAsStream = ContentWriter::class.java.getResourceAsStream(sourcePath)
         val destination = File(root, targetName)
 
-        origin.copyTo(destination, overwrite = true)
+        Files.createDirectories(destination.parentFile.toPath())
+        Files.createFile(destination.toPath())
+        Files.copy(sourceAsStream, destination.toPath(), StandardCopyOption.REPLACE_EXISTING)
     }
 
     override fun append(targetName: String, content: String) {
@@ -39,8 +42,6 @@ class FileContentWriter(private val root: File) : ContentWriter {
         val destination = File(root, targetName)
         FileOutputStream(destination, true).bufferedWriter().use { writer -> writer.appendln(content) }
     }
-
-    private fun readFromResource(file: String) = File(ContentWriter::class.java.getResource(file).toURI())
 }
 
 class LogContentWriter(private val root: File) : ContentWriter {

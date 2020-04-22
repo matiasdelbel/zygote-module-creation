@@ -17,7 +17,7 @@ class DomainGradleFile : GradleFile() {
         fileBuilder.appendln("}")
         if (innerDependencies.isNotEmpty()) {
             fileBuilder.appendln("dependencies {")
-            innerDependencies.forEach { fileBuilder.appendln("    implementation(project(path = \"$it))") }
+            innerDependencies.forEach { fileBuilder.appendln("    implementation(project(path = \"$it\"))") }
             fileBuilder.appendln("}")
         }
 

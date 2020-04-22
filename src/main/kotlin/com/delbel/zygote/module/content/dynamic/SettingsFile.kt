@@ -20,6 +20,7 @@ class SettingsFile : DynamicContent() {
     fun content(moduleName: String, modulePath: String): String {
         val fileBuilder = StringBuilder()
 
+        fileBuilder.appendln()
         fileBuilder.appendln("include(\"$moduleName\")")
         fileBuilder.appendln("project(path = \"$moduleName\").projectDir = File(rootDir, \"$modulePath\")")
 
