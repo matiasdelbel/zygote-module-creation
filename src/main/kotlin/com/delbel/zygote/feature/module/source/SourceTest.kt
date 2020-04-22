@@ -3,11 +3,9 @@ package com.delbel.zygote.feature.module.source
 import com.delbel.zygote.writer.ModuleWriteable
 import com.delbel.zygote.writer.ModuleWriter
 
-class SourceTest(private val packageName: String) : ModuleWriteable {
+class SourceTest() : ModuleWriteable {
 
     override fun <T> create(writer: ModuleWriter<T>) = writer.visit(sourceTest = this)
-
-    fun packages() = packageName.split(".")
 
     fun sourcePath() = "$SOURCE_FOLDER/$CODE_FOLDER"
 

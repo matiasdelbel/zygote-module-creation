@@ -10,7 +10,6 @@ import com.delbel.zygote.writer.Writeable
 import com.delbel.zygote.writer.Writer
 
 abstract class Module(
-    private val parent: String,
     val name: String,
     private val sourceMain: SourceMain? = null,
     private val sourceTest: SourceTest? = null
@@ -33,6 +32,4 @@ abstract class Module(
 
         // TODO append on settings.gradle.kts the module
     }
-
-    fun path() = "$parent/$name"
 }

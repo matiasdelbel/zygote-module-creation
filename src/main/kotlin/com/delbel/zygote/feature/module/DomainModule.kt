@@ -4,11 +4,10 @@ import com.delbel.zygote.feature.module.gradle.DomainBuildGradle
 import com.delbel.zygote.feature.module.source.SourceMain
 import com.delbel.zygote.feature.module.source.SourceTest
 
-class DomainModule(parent: String, packageRoot: String) : Module(
-    parent = parent,
+class DomainModule : Module(
     name = "domain",
-    sourceMain = SourceMain(packageName = "$packageRoot.$parent.domain"),
-    sourceTest = SourceTest(packageName = "$packageRoot.$parent.domain")
+    sourceMain = SourceMain(),
+    sourceTest = SourceTest()
 ) {
-    override val buildGradle = DomainBuildGradle(parent)
+    override val buildGradle = DomainBuildGradle()
 }

@@ -2,7 +2,7 @@ package com.delbel.zygote.feature.module.gradle
 
 import com.delbel.zygote.writer.ModuleWriter
 
-class DomainBuildGradle(private val parent: String) : BuildGradle {
+class DomainBuildGradle : BuildGradle {
 
     override fun relativePath(): String = "build.gradle.kts"
 

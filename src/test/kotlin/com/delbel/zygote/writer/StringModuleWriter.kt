@@ -10,41 +10,41 @@ import com.delbel.zygote.feature.module.source.SourceMain
 import com.delbel.zygote.feature.module.source.SourceTest
 import java.lang.StringBuilder
 
-class StringModuleWriter(parent: String) : ModuleWriter<String>(parent) {
+class StringModuleWriter(parent: String) : ModuleWriter<String>(parent, "") {
 
     private val featureBuilder = StringBuilder()
 
     override fun visit(proguard: ProGuard) {
         featureBuilder.appendln()
-        featureBuilder.append("${parent}/${proguard.name}")
+        featureBuilder.append("${moduleContainer}/${proguard.name}")
     }
 
     override fun visit(gitIgnore: GitIgnore) {
         featureBuilder.appendln()
-        featureBuilder.append("${parent}/${gitIgnore.name}")
+        featureBuilder.append("${moduleContainer}/${gitIgnore.name}")
     }
 
     override fun visit(sourceMain: SourceMain) {
         featureBuilder.appendln()
         var sourcePath = sourceMain.sourcePath()
-        sourceMain.packages().forEach { sourcePath = "$sourcePath/$it" }
-        featureBuilder.append("${parent}/$sourcePath")
+        //sourceMain.packages().forEach { sourcePath = "$sourcePath/$it" }
+        //featureBuilder.append("${moduleContainer}/$sourcePath")
     }
 
     override fun visit(sourceTest: SourceTest) {
         featureBuilder.appendln()
         var sourcePath = sourceTest.sourcePath()
-        sourceTest.packages().forEach { sourcePath = "$sourcePath/$it" }
-        featureBuilder.append("${parent}/$sourcePath")
+        //sourceTest.packages().forEach { sourcePath = "$sourcePath/$it" }
+        featureBuilder.append("${moduleContainer}/$sourcePath")
 
         featureBuilder.appendln()
-        featureBuilder.append("${parent}/${sourceTest.mockMarkerPath()}")
+        featureBuilder.append("${moduleContainer}/${sourceTest.mockMarkerPath()}")
     }
 
     override fun visit(manifest: Manifest) {
         featureBuilder.appendln()
-        featureBuilder.append("${parent}/${manifest.relativePath()}")
-        featureBuilder.append(" (package = ${manifest.packageName})")
+        featureBuilder.append("${moduleContainer}/${manifest.relativePath()}")
+        //featureBuilder.append(" (package = ${manifest.packageName})")
     }
 
     fun test(): String = featureBuilder.toString()

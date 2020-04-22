@@ -4,7 +4,6 @@ import com.delbel.zygote.feature.module.Module
 import com.delbel.zygote.writer.ModuleWriter
 
 class GatewayBuildGradle(
-    private val parent: String,
     private val dependencies: List<Module> = emptyList()
 ) : BuildGradle {
 
@@ -12,18 +11,18 @@ class GatewayBuildGradle(
 
     override fun <T> create(writer: ModuleWriter<T>) = writer.visit(buildGradle = this)
 
-    fun asString() = "plugins {\n" +
+    fun asString(moduleName: String) = "plugins {\n" +
             "    id(\"com.android.library\")\n" +
             "    id(\"project-module-plugin\")\n" +
             "}\n" +
             "\n" +
-            "dependencies {" + dependencies() + "}"
+            "dependencies {" + dependencies(moduleName) + "}"
 
-    private fun dependencies(): String {
+    private fun dependencies(moduleName: String): String {
         val dependenciesList = StringBuffer()
         dependenciesList.appendln()
         dependencies.forEach {
-            dependenciesList.appendln("    implementation(project(path = \":$parent:${it.name}\"))")
+            dependenciesList.appendln("    implementation(project(path = \":$moduleName:${it.name}\"))")
         }
         return dependenciesList.toString()
     }

@@ -12,7 +12,7 @@ import org.junit.Test
 
 class FeatureTest {
 
-    @Test
+    /*@Test
     fun `create with root name feature should write it down`() {
         val writer = StringWriter(root = "> ")
         val feature = Feature(name = "feature")
@@ -76,7 +76,7 @@ class FeatureTest {
         feature.create(writer)
 
         assertThat(writer.test(), isEqualTo(readFromResource(expected = "/feature_domain_source")))
-    }
+    }*/
 
     private fun readFromResource(expected: String) = FeatureTest::class.java.getResource(expected).readText()
 }
