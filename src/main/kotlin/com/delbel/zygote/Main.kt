@@ -10,8 +10,8 @@ import java.nio.file.Paths
 
 fun main(args: Array<String>) {
     val domain = DomainModule(parent = "feature", packageRoot = "com.delbel.zygote")
-    val gateway = GatewayModule(parent = "feature", packageRoot = "com.delbel.zygote")
-    val presentation = PresentationModule(parent = "feature", packageRoot = "com.delbel.zygote")
+    val gateway = GatewayModule(parent = "feature", packageRoot = "com.delbel.zygote", dependencies = listOf(domain))
+    val presentation = PresentationModule(parent = "feature", packageRoot = "com.delbel.zygote", dependencies = listOf(domain))
 
     val feature = Feature(name = "feature", modules = listOf(domain, gateway, presentation))
     val writer = FileWriter(root = root())

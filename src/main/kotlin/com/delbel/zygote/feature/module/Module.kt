@@ -9,10 +9,9 @@ import com.delbel.zygote.feature.module.gradle.DomainBuildGradle
 import com.delbel.zygote.writer.Writeable
 import com.delbel.zygote.writer.Writer
 
-open class Module(
+abstract class Module(
     private val parent: String,
-    private val name: String,
-    private val buildGradle: BuildGradle,
+    val name: String,
     private val sourceMain: SourceMain? = null,
     private val sourceTest: SourceTest? = null
 ) : Writeable {
@@ -20,11 +19,14 @@ open class Module(
     private val proGuard = ProGuard()
     private val gitIgnore = GitIgnore()
 
+    protected abstract val buildGradle: BuildGradle
+
     override fun <T> create(writer: Writer<T>) {
         val moduleWriter = writer.visit(module = this)
 
         proGuard.create(moduleWriter)
         gitIgnore.create(moduleWriter)
+        buildGradle.create(moduleWriter)
 
         sourceMain?.create(moduleWriter)
         sourceTest?.create(moduleWriter)

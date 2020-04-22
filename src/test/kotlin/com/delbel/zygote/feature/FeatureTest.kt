@@ -1,5 +1,6 @@
 package com.delbel.zygote.feature
 
+import com.delbel.zygote.feature.module.DomainModule
 import com.delbel.zygote.feature.module.Module
 import com.delbel.zygote.feature.module.source.SourceMain
 import com.delbel.zygote.feature.module.source.SourceTest
@@ -24,10 +25,9 @@ class FeatureTest {
     @Test
     fun `create with domain module should write it down`() {
         val writer = StringWriter(root = "> ")
-        val domain = Module(
+        val domain = DomainModule(
             parent = "feature",
-            buildGradle = DomainBuildGradle(),
-            name = "domain"
+            packageRoot = "com.delbel.zygote"
         )
         val feature = Feature(name = "feature", modules = listOf(domain))
 
@@ -39,11 +39,9 @@ class FeatureTest {
     @Test
     fun `create with domain module with main source set should write it down`() {
         val writer = StringWriter(root = "> ")
-        val domain = Module(
+        val domain = DomainModule(
             parent = "feature",
-            name = "domain",
-            buildGradle = DomainBuildGradle(),
-            sourceMain = SourceMain(packageName = "com.delbel.zygote")
+            packageRoot = "com.delbel.zygote"
         )
         val feature = Feature(name = "feature", modules = listOf(domain))
 
@@ -55,11 +53,9 @@ class FeatureTest {
     @Test
     fun `create with domain module with test source set should write it down`() {
         val writer = StringWriter(root = "> ")
-        val domain = Module(
+        val domain = DomainModule(
             parent = "feature",
-            name = "domain",
-            buildGradle = DomainBuildGradle(),
-            sourceTest = SourceTest(packageName = "com.delbel.zygote")
+            packageRoot = "com.delbel.zygote"
         )
         val feature = Feature(name = "feature", modules = listOf(domain))
 
@@ -71,12 +67,9 @@ class FeatureTest {
     @Test
     fun `create with domain module with sources set should write it down`() {
         val writer = StringWriter(root = "> ")
-        val domain = Module(
+        val domain = DomainModule(
             parent = "feature",
-            name = "domain",
-            buildGradle = DomainBuildGradle(),
-            sourceMain = SourceMain(packageName = "com.delbel.zygote"),
-            sourceTest = SourceTest(packageName = "com.delbel.zygote")
+            packageRoot = "com.delbel.zygote"
         )
         val feature = Feature(name = "feature", modules = listOf(domain))
 

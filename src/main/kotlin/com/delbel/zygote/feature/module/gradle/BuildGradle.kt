@@ -1,3 +1,8 @@
 package com.delbel.zygote.feature.module.gradle
 
-interface BuildGradle
+import com.delbel.zygote.writer.ModuleWriteable
+
+interface BuildGradle : ModuleWriteable {
+
+    fun relativePath(): String
+}

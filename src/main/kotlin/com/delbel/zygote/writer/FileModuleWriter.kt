@@ -3,6 +3,9 @@ package com.delbel.zygote.writer
 import com.delbel.zygote.feature.module.files.GitIgnore
 import com.delbel.zygote.feature.module.files.Manifest
 import com.delbel.zygote.feature.module.files.ProGuard
+import com.delbel.zygote.feature.module.gradle.DomainBuildGradle
+import com.delbel.zygote.feature.module.gradle.GatewayBuildGradle
+import com.delbel.zygote.feature.module.gradle.PresentationBuildGradle
 import com.delbel.zygote.feature.module.source.SourceMain
 import com.delbel.zygote.feature.module.source.SourceTest
 import java.io.File
@@ -33,6 +36,21 @@ class FileModuleWriter(parent: File) : ModuleWriter<File>(parent) {
     override fun visit(manifest: Manifest) {
         val manifestFile = File(parent, manifest.relativePath())
         manifestFile.bufferedWriter().use { out -> out.write(manifest.asString()) }
+    }
+
+    override fun visit(buildGradle: DomainBuildGradle) {
+        val buildGradleFile = File(parent, buildGradle.relativePath())
+        buildGradleFile.bufferedWriter().use { out -> out.write(buildGradle.asString()) }
+    }
+
+    override fun visit(buildGradle: GatewayBuildGradle) {
+        val buildGradleFile = File(parent, buildGradle.relativePath())
+        buildGradleFile.bufferedWriter().use { out -> out.write(buildGradle.asString()) }
+    }
+
+    override fun visit(buildGradle: PresentationBuildGradle) {
+        val buildGradleFile = File(parent, buildGradle.relativePath())
+        buildGradleFile.bufferedWriter().use { out -> out.write(buildGradle.asString()) }
     }
 
     private fun copy(originPath: String, destinationRelativePath: String) {
