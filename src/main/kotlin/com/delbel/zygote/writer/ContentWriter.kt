@@ -6,7 +6,7 @@ interface ContentWriter {
 
     fun write(targetName: String, content: String)
 
-    fun copy(sourcePath: String, targetName: String)
+    fun copy(targetName: String, sourcePath: String)
 }
 
 class FileContentWriter(private val module: File) : ContentWriter {
@@ -16,7 +16,7 @@ class FileContentWriter(private val module: File) : ContentWriter {
         buildGradleFile.bufferedWriter().use { out -> out.write(content) }
     }
 
-    override fun copy(sourcePath: String, targetName: String) {
+    override fun copy(targetName: String, sourcePath: String) {
         val origin = readFromResource(file = sourcePath)
         val destination = File(module, targetName)
 

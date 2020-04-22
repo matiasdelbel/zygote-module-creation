@@ -7,5 +7,5 @@ abstract class HardContent {
     protected abstract val name: String
     protected abstract val source: String
 
-    fun write(writer: ContentWriter) = writer.copy(sourcePath = source, targetName = name)
+    fun write(writer: ContentWriter) = writer.copy(targetName = name, sourcePath = source)
 }
