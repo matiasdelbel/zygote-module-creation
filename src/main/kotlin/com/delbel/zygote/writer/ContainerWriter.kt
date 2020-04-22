@@ -18,7 +18,6 @@ class DirectoryContainerWriter(private val root: File) : ContainerWriter {
     }
 }
 
-
 class LogContainerWriter(private val root: File) : ContainerWriter {
 
     override fun create(path: String) {

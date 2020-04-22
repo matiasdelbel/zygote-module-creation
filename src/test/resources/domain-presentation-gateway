@@ -1,0 +1,24 @@
+DIRECTORY: > /domain
+ NEW file: > /domain/proguard-rules.pro (source: /hard/proguard-rules.pro)
+ NEW file: > /domain/.gitignore (source: /hard/.gitignore)
+ NEW file: > /domain/build.gradle.kts (dynamic content)
+DIRECTORY: > /domain/src/main/kotlin/com/delbel/zygote/domain
+ NEW file: > /domain/src/main/AndroidManifest.xml (dynamic content)
+DIRECTORY: > /domain/src/test/kotlin/com/delbel/zygote/domain
+ NEW file: > /domain/src/test/resources/mockito-extensions/org.mockito.plugins.MockMaker (source: /hard/org.mockito.plugins.MockMaker)
+DIRECTORY: > /presentation
+ NEW file: > /presentation/proguard-rules.pro (source: /hard/proguard-rules.pro)
+ NEW file: > /presentation/.gitignore (source: /hard/.gitignore)
+ NEW file: > /presentation/build.gradle.kts (dynamic content)
+DIRECTORY: > /presentation/src/main/kotlin/com/delbel/zygote/presentation
+ NEW file: > /presentation/src/main/AndroidManifest.xml (dynamic content)
+DIRECTORY: > /presentation/src/test/kotlin/com/delbel/zygote/presentation
+ NEW file: > /presentation/src/test/resources/mockito-extensions/org.mockito.plugins.MockMaker (source: /hard/org.mockito.plugins.MockMaker)
+DIRECTORY: > /gateway
+ NEW file: > /gateway/proguard-rules.pro (source: /hard/proguard-rules.pro)
+ NEW file: > /gateway/.gitignore (source: /hard/.gitignore)
+ NEW file: > /gateway/build.gradle.kts (dynamic content)
+DIRECTORY: > /gateway/src/main/kotlin/com/delbel/zygote/gateway
+ NEW file: > /gateway/src/main/AndroidManifest.xml (dynamic content)
+DIRECTORY: > /gateway/src/test/kotlin/com/delbel/zygote/gateway
+ NEW file: > /gateway/src/test/resources/mockito-extensions/org.mockito.plugins.MockMaker (source: /hard/org.mockito.plugins.MockMaker)

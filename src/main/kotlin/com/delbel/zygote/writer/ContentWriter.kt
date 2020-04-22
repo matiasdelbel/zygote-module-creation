@@ -48,5 +48,5 @@ class LogContentWriter(private val root: File) : ContentWriter {
 
     override fun copy(targetName: String, sourcePath: String) = println(" NEW file: $root/$targetName (source: $sourcePath)")
 
-    override fun append(targetName: String, content: String) = println(" APPENDED file: $root/$targetName")
+    override fun append(targetName: String, content: String) = println("APPENDED: $root/$targetName")
 }

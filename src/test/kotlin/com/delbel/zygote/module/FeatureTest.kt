@@ -1,72 +1,120 @@
 package com.delbel.zygote.module
 
+import com.delbel.zygote.module.content.dynamic.SettingsFile
+import com.delbel.zygote.module.content.dynamic.gradle.DomainGradleFile
+import com.delbel.zygote.module.content.dynamic.gradle.PresentationGradleFile
+import com.delbel.zygote.writer.StringContainerWriter
+import com.delbel.zygote.writer.StringContentWriter
+import org.hamcrest.CoreMatchers.`is` as isEqualTo
+import org.hamcrest.MatcherAssert.assertThat
+import org.junit.Test
+
 class FeatureTest {
 
-    /*@Test
-    fun `create with root name feature should write it down`() {
-        val writer = StringWriter(root = "> ")
-        val feature = Feature(name = "feature")
+    @Test
+    fun `create domain should create files`() {
+        val stringBuffer = StringBuffer()
+        val feature = Feature(name = "> feature", basePackage = "com.delbel.zygote")
+        val domain = Module(
+            name = "domain",
+            feature = feature,
+            buildGradle = DomainGradleFile()
+        )
 
-        feature.create(writer)
+        domain.create(
+            containerWriter = StringContainerWriter(root = "> ", buffer = stringBuffer),
+            contentWriter = StringContentWriter(root = "> ", buffer = stringBuffer)
+        )
 
-        assertThat(writer.test(), isEqualTo(readFromResource(expected = "/feature")))
+        assertThat(stringBuffer.toString(), isEqualTo(readFromResource(expected = "/domain")))
     }
 
     @Test
-    fun `create with domain module should write it down`() {
-        val writer = StringWriter(root = "> ")
-        val domain = DomainModule(
-            parent = "feature",
-            packageRoot = "com.delbel.zygote"
+    fun `create domain and presentation should create files`() {
+        val stringBuffer = StringBuffer()
+        val feature = Feature(name = "> feature", basePackage = "com.delbel.zygote")
+        val domain = Module(
+            name = "domain",
+            feature = feature,
+            buildGradle = DomainGradleFile()
         )
-        val feature = Feature(name = "feature", modules = listOf(domain))
+        val presentation = Module(
+            name = "presentation",
+            feature = feature,
+            buildGradle = PresentationGradleFile()
+        )
 
-        feature.create(writer)
+        listOf(domain, presentation).forEach {
+            it.create(
+                containerWriter = StringContainerWriter(root = "> ", buffer = stringBuffer),
+                contentWriter = StringContentWriter(root = "> ", buffer = stringBuffer)
+            )
+        }
 
-        assertThat(writer.test(), isEqualTo(readFromResource(expected = "/feature_domain")))
+        assertThat(stringBuffer.toString(), isEqualTo(readFromResource(expected = "/domain-presentation")))
     }
 
     @Test
-    fun `create with domain module with main source set should write it down`() {
-        val writer = StringWriter(root = "> ")
-        val domain = DomainModule(
-            parent = "feature",
-            packageRoot = "com.delbel.zygote"
+    fun `create domain and presentation and gateway should create files`() {
+        val stringBuffer = StringBuffer()
+        val feature = Feature(name = "> feature", basePackage = "com.delbel.zygote")
+        val domain = Module(
+            name = "domain",
+            feature = feature,
+            buildGradle = DomainGradleFile()
         )
-        val feature = Feature(name = "feature", modules = listOf(domain))
+        val presentation = Module(
+            name = "presentation",
+            feature = feature,
+            buildGradle = PresentationGradleFile()
+        )
+        val gateway = Module(
+            name = "gateway",
+            feature = feature,
+            buildGradle = PresentationGradleFile()
+        )
 
-        feature.create(writer)
+        listOf(domain, presentation, gateway).forEach {
+            it.create(
+                containerWriter = StringContainerWriter(root = "> ", buffer = stringBuffer),
+                contentWriter = StringContentWriter(root = "> ", buffer = stringBuffer)
+            )
+        }
 
-        assertThat(writer.test(), isEqualTo(readFromResource(expected = "/feature_domain_main_source")))
+        assertThat(stringBuffer.toString(), isEqualTo(readFromResource(expected = "/domain-presentation-gateway")))
     }
 
     @Test
-    fun `create with domain module with test source set should write it down`() {
-        val writer = StringWriter(root = "> ")
-        val domain = DomainModule(
-            parent = "feature",
-            packageRoot = "com.delbel.zygote"
+    fun `create domain and presentation and gateway and editing setings should create files`() {
+        val stringBuffer = StringBuffer()
+        val feature = Feature(name = "> feature", basePackage = "com.delbel.zygote")
+        val domain = Module(
+            name = "domain",
+            feature = feature,
+            buildGradle = DomainGradleFile()
         )
-        val feature = Feature(name = "feature", modules = listOf(domain))
+        val presentation = Module(
+            name = "presentation",
+            feature = feature,
+            buildGradle = PresentationGradleFile()
+        )
+        val gateway = Module(
+            name = "gateway",
+            feature = feature,
+            buildGradle = PresentationGradleFile()
+        )
+        val settings = SettingsFile()
 
-        feature.create(writer)
+        listOf(domain, presentation, gateway).forEach {
+            it.create(
+                containerWriter = StringContainerWriter(root = "> ", buffer = stringBuffer),
+                contentWriter = StringContentWriter(root = "> ", buffer = stringBuffer)
+            )
+            settings.write(writer = StringContentWriter(root = "> ", buffer = stringBuffer), module = it)
+        }
 
-        assertThat(writer.test(), isEqualTo(readFromResource(expected = "/feature_domain_test_source")))
+        assertThat(stringBuffer.toString(), isEqualTo(readFromResource(expected = "/domain-presentation-gateway-settings")))
     }
-
-    @Test
-    fun `create with domain module with sources set should write it down`() {
-        val writer = StringWriter(root = "> ")
-        val domain = DomainModule(
-            parent = "feature",
-            packageRoot = "com.delbel.zygote"
-        )
-        val feature = Feature(name = "feature", modules = listOf(domain))
-
-        feature.create(writer)
-
-        assertThat(writer.test(), isEqualTo(readFromResource(expected = "/feature_domain_source")))
-    }*/
 
     private fun readFromResource(expected: String) = FeatureTest::class.java.getResource(expected).readText()
 }
