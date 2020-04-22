@@ -1,11 +1,11 @@
 package com.delbel.zygote.feature.content.hard
 
-import com.delbel.zygote.writer.HardContentWriter
+import com.delbel.zygote.writer.ContentWriter
 
 abstract class HardContent {
 
     protected abstract val name: String
     protected abstract val source: String
 
-    fun write(writer: HardContentWriter) = writer.copy(sourcePath = source, targetName = name)
+    fun write(writer: ContentWriter) = writer.copy(sourcePath = source, targetName = name)
 }

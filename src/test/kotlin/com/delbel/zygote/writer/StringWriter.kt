@@ -32,7 +32,7 @@ class StringWriter(root: String) : Writer<String>(root, "", root= "") {
         return featureBuilder.toString()
     }
 
-    override fun visit(module: Module): Pair<ModuleWriter<String>, HardContentWriter> {
+    override fun visit(module: Module): Pair<ModuleWriter<String>, ContentWriter> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

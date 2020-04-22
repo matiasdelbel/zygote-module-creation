@@ -2,12 +2,19 @@ package com.delbel.zygote.writer
 
 import java.io.File
 
-interface HardContentWriter {
+interface ContentWriter {
+
+    fun write(targetName: String, content: String)
 
     fun copy(sourcePath: String, targetName: String)
 }
 
-class FileHardContentWriter(private val module: File) : HardContentWriter {
+class FileContentWriter(private val module: File) : ContentWriter {
+
+    override fun write(targetName: String, content: String) {
+        val buildGradleFile = File(module, targetName)
+        buildGradleFile.bufferedWriter().use { out -> out.write(content) }
+    }
 
     override fun copy(sourcePath: String, targetName: String) {
         val origin = readFromResource(file = sourcePath)

@@ -11,7 +11,7 @@ abstract class Writer<T>(
 
     abstract fun visit(feature: Feature)
 
-    abstract fun visit(module: Module): Pair<ModuleWriter<T>, HardContentWriter>
+    abstract fun visit(module: Module): Pair<ModuleWriter<T>, ContentWriter>
 }
 
 interface Writeable {
