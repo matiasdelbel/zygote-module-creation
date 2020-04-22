@@ -34,8 +34,6 @@ class Module(
     fun pathFor(source: Source) = feature.sourcePathFor(module = this, source = source)
 
     fun create(containerWriter: ContainerWriter, contentWriter: ContentWriter) {
-        containerWriter.create(name)
-
         proGuard.write(contentWriter)
         gitIgnore.write(contentWriter)
         buildGradle.write(contentWriter, module = this)

@@ -7,6 +7,8 @@ import com.delbel.zygote.feature.content.dynamic.gradle.PresentationGradleFile
 import com.delbel.zygote.feature.Module
 import com.delbel.zygote.writer.DirectoryContainerWriter
 import com.delbel.zygote.writer.FileContentWriter
+import com.delbel.zygote.writer.LogContainerWriter
+import com.delbel.zygote.writer.LogContentWriter
 import java.io.File
 import java.nio.file.Paths
 
@@ -36,8 +38,8 @@ fun main(args: Array<String>) {
     )
 
     listOf(domain, presentation, gateway).forEach { module -> module.create(
-        containerWriter = DirectoryContainerWriter(root = featureFile),
-        contentWriter = FileContentWriter(root = featureFile))
+        containerWriter = DirectoryContainerWriter(root = File(featureFile, module.name)),
+        contentWriter = FileContentWriter(root = File(featureFile, module.name)))
     }
 }
 
