@@ -1,6 +1,10 @@
 package com.delbel.zygote.feature.module
 
 import com.delbel.zygote.feature.content.dynamic.*
+import com.delbel.zygote.feature.content.dynamic.gradle.DomainGradleFile
+import com.delbel.zygote.feature.content.dynamic.gradle.GatewayGradleFile
+import com.delbel.zygote.feature.content.dynamic.gradle.GradleFile
+import com.delbel.zygote.feature.content.dynamic.gradle.PresentationGradleFile
 import com.delbel.zygote.feature.content.hard.GitIgnoreFile
 import com.delbel.zygote.feature.content.hard.ProGuardFile
 import com.delbel.zygote.feature.module.source.SourceMain
@@ -12,7 +16,7 @@ class Module(
     val feature: String,
     val name: String,
     val packageName: String,
-    private val buildGradle: DynamicContent,
+    private val buildGradle: GradleFile,
     private val dependencies: List<Module> = emptyList(),
 
     private val sourceMain: SourceMain? = SourceMain(),
@@ -24,15 +28,9 @@ class Module(
 
     fun visit(file: DynamicContent): String = file.accept(module = this)
 
-    fun visit(file: ManifestFile): String = file.content(packageName = modulePackage())
+    fun visit(file: ManifestFile): String = file.content(packageName = "$packageName.$feature.$name")
 
-    fun visit(file: DomainGradleFile): String = file.content()
-
-    fun visit(file: PresentationGradleFile): String = file.content(feature = feature, innerDependencies = dependencies)
-
-    fun visit(file: GatewayGradleFile): String = file.content(feature = feature, innerDependencies = dependencies)
-
-    private fun modulePackage() = "$packageName.$feature.$name"
+    fun visit(file: GradleFile): String = file.content(innerDependencies = dependencies.map { "$feature:${it.name}" })
 
     // TODO all deprecated
 

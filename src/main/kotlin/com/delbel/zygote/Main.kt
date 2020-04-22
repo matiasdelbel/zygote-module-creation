@@ -1,9 +1,9 @@
 package com.delbel.zygote
 
 import com.delbel.zygote.feature.*
-import com.delbel.zygote.feature.content.dynamic.DomainGradleFile
-import com.delbel.zygote.feature.content.dynamic.GatewayGradleFile
-import com.delbel.zygote.feature.content.dynamic.PresentationGradleFile
+import com.delbel.zygote.feature.content.dynamic.gradle.DomainGradleFile
+import com.delbel.zygote.feature.content.dynamic.gradle.GatewayGradleFile
+import com.delbel.zygote.feature.content.dynamic.gradle.PresentationGradleFile
 import com.delbel.zygote.feature.module.Module
 import com.delbel.zygote.writer.FileWriterDeprecated
 import java.io.File
