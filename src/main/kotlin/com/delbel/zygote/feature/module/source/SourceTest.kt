@@ -12,8 +12,6 @@ class SourceTest : ModuleWriteable {
 
     fun sourcePath() = "$SOURCE_FOLDER/$CODE_FOLDER"
 
-   // fun mockMarkerPath() = MOCK_MARKER_PATH
-
     companion object {
         private const val SOURCE_FOLDER = "src/test"
 

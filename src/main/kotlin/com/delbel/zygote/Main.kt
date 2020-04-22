@@ -9,12 +9,26 @@ import java.io.File
 import java.nio.file.Paths
 
 fun main(args: Array<String>) {
-    val domain = DomainModule()
-    val gateway = GatewayModule(dependencies = listOf(domain))
-    val presentation = PresentationModule(dependencies = listOf(domain))
+    val domain = DomainModule(
+        feature = "feature",
+        packageName = "com.delbel.zygote"
+    )
+    val gateway = GatewayModule(
+        feature = "feature",
+        packageName = "com.delbel.zygote",
+        dependencies = listOf(domain))
+    val presentation = PresentationModule(
+        feature = "feature",
+        packageName = "com.delbel.zygote",
+        dependencies = listOf(domain))
+
     val feature = Feature(modules = listOf(domain, gateway, presentation))
 
-    val writer = FileWriterDeprecated(featureName = "feature", packageName = "com.delbel.zygote", root = root())
+    val writer = FileWriterDeprecated(
+        featureName = "feature",
+        packageName = "com.delbel.zygote",
+        root = root()
+    )
 
     feature.create(writer)
 }

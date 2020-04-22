@@ -1,7 +1,6 @@
 package com.delbel.zygote.writer
 
 import com.delbel.zygote.feature.Feature
-import com.delbel.zygote.feature.content.dynamic.ContentContext
 import com.delbel.zygote.feature.module.Module
 import java.io.File
 
@@ -18,9 +17,9 @@ class FileWriterDeprecated(featureName: String, packageName: String, root: File)
         val moduleFolder = File(root, "$featureName/${module.name}")
 
         val contentWriter = FileContentWriter(module = moduleFolder)
-        val moduleWriter = FileModuleWriter(moduleFolder, packageName, contentWriter)
+        val moduleWriter = FileModuleWriter(moduleFolder, packageName, module, contentWriter)
 
-        module.buildGradle2?.write(contentWriter, ContentContext(featureName, module.name, packageName))
+        module.buildGradle2?.write(contentWriter, module)
 
         return Pair(moduleWriter, contentWriter)
     }

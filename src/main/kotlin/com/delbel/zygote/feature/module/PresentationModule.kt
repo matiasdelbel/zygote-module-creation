@@ -1,13 +1,16 @@
 package com.delbel.zygote.feature.module
 
-import com.delbel.zygote.feature.module.gradle.PresentationBuildGradle
+import com.delbel.zygote.feature.content.dynamic.PresentationGradleFile
 import com.delbel.zygote.feature.module.source.SourceMain
 import com.delbel.zygote.feature.module.source.SourceTest
 
-class PresentationModule(dependencies: List<Module> = emptyList()) : Module(
+class PresentationModule(dependencies: List<Module> = emptyList(), packageName: String, feature: String) : Module(
+    feature = feature,
     name = "presentation",
+    packageName = packageName,
     sourceMain = SourceMain(),
-    sourceTest = SourceTest()
+    sourceTest = SourceTest(),
+    dependencies = dependencies
 ) {
-    override val buildGradle = PresentationBuildGradle(dependencies)
+    override val buildGradle2 = PresentationGradleFile()
 }

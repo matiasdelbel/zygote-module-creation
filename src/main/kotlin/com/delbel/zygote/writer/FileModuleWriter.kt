@@ -1,8 +1,7 @@
 package com.delbel.zygote.writer
 
-import com.delbel.zygote.feature.content.dynamic.ContentContext
+import com.delbel.zygote.feature.module.Module
 import com.delbel.zygote.feature.module.gradle.GatewayBuildGradle
-import com.delbel.zygote.feature.module.gradle.PresentationBuildGradle
 import com.delbel.zygote.feature.module.source.SourceMain
 import com.delbel.zygote.feature.module.source.SourceTest
 import java.io.File
@@ -10,6 +9,7 @@ import java.io.File
 class FileModuleWriter(
     moduleFolder: File,
     packageName: String,
+    private val module: Module,
     private val contentWriter: FileContentWriter
 ) : ModuleWriter<File>(moduleFolder, packageName) {
 
@@ -20,7 +20,7 @@ class FileModuleWriter(
         packagesSplit.forEach { folder = File(folder, it).also { file -> file.mkdir() } }
 
         // TODO Manifest
-        sourceMain.manifest.write(contentWriter, ContentContext("feature", "domain", packageName))
+        sourceMain.manifest.write(contentWriter, module = module)
     }
 
     override fun visit(sourceTest: SourceTest) {
@@ -34,8 +34,5 @@ class FileModuleWriter(
     }
 
     override fun visit(buildGradle: GatewayBuildGradle) =
-        contentWriter.write(buildGradle.relativePath(), content = buildGradle.asString(packageName))
-
-    override fun visit(buildGradle: PresentationBuildGradle) =
         contentWriter.write(buildGradle.relativePath(), content = buildGradle.asString(packageName))
 }
