@@ -1,4 +1,4 @@
-package com.delbel.zygote.feature.module
+package com.delbel.zygote.feature
 
 import com.delbel.zygote.feature.content.dynamic.*
 import com.delbel.zygote.feature.content.dynamic.gradle.GradleFile
@@ -28,7 +28,7 @@ class Module(
 
     fun contentFor(file: ManifestFile) = file.content(packageName = "$packageName.$feature.$name")
 
-    fun contentFor(file: GradleFile) = file.content(innerDependencies = innerDependencies.map { "$feature:${it.name}" })
+    fun contentFor(file: GradleFile) = file.content(innerDependencies = innerDependencies.map { "${it.feature}:${it.name}" })
 
     fun pathFor(source: Source) = "${source.path()}${packageName.split(".").joinToString("/")}"
 

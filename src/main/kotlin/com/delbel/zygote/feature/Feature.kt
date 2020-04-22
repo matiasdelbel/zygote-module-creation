@@ -1,25 +1,16 @@
 package com.delbel.zygote.feature
 
-import com.delbel.zygote.feature.module.Module
 import com.delbel.zygote.writer.*
-import java.io.File
 
-class Feature(
-    val root: File,
-    private val modules: List<Module> = emptyList()
-) {
+class Feature(private val name: String, private val modules: List<Module> = emptyList()) {
 
-    fun create() {
-        createDirectory(parent = root, name = "feature")
+    fun create(containerWriter: ContainerWriter, contentWriter: FileContentWriter) {
+        containerWriter.create(name)
+        // TODO update settings file
 
-        val featureFile = File(root, "feature")
-        modules.forEach {
-            it.create(
-                containerWriter = DirectoryContainerWriter(module = File(featureFile, it.name)),
-                contentWriter = FileContentWriter(module = File(featureFile, it.name))
-            )
+        modules.forEach { module ->
+            val modulePath = "$name/${module.name}"
+            module.create(containerWriter.clone(subPath = modulePath), contentWriter.clone(subPath = modulePath))
         }
     }
-
-    private fun createDirectory(parent: File, name: String) = File(parent, name).mkdir()
 }

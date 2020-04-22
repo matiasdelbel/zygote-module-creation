@@ -1,7 +1,7 @@
 package com.delbel.zygote.feature.content.source
 
 import com.delbel.zygote.feature.content.dynamic.ManifestFile
-import com.delbel.zygote.feature.module.Module
+import com.delbel.zygote.feature.Module
 import com.delbel.zygote.writer.ContainerWriter
 import com.delbel.zygote.writer.ContentWriter
 

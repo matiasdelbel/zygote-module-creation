@@ -1,6 +1,6 @@
 package com.delbel.zygote.feature.content.dynamic
 
-import com.delbel.zygote.feature.module.Module
+import com.delbel.zygote.feature.Module
 
 class ManifestFile : DynamicContent() {
 
