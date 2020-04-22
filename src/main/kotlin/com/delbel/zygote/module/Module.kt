@@ -39,6 +39,8 @@ class Module(
 
     fun relativePathFor(file: ManifestFile) = "${srcPathFor(sourceMain)}/${file.name}"
 
+    fun relativePathFor(file: SettingsFile) = file.name
+
     fun relativePathFor(source: Source) = "$name/${source.src()}/kotlin/${feature.basePackage.split(".").joinToString("/")}/$name"
 
     fun contentFor(file: DynamicContent) = file.content(module = this)
@@ -46,6 +48,8 @@ class Module(
     fun contentFor(file: ManifestFile) = file.content(packageName = "${feature.basePackage}.${feature.name}.$name")
 
     fun contentFor(file: GradleFile) = file.content(innerDependencies = innerDependencies.map { ":${feature.name}:$name" })
+
+    fun contentFor(file: SettingsFile) = file.content(moduleName = ":${feature.name}:$name", modulePath = "${feature.name}/$name")
 
     fun create(containerWriter: ContainerWriter, contentWriter: ContentWriter) {
         containerWriter.create(name)
@@ -56,8 +60,6 @@ class Module(
 
         sourceMain.write(containerWriter = containerWriter, contentWriter = contentWriter, module = this)
         sourceTest.write(containerWriter = containerWriter, contentWriter = contentWriter, module = this)
-
-        // TODO update settings file
     }
 
     private fun resourcesPathFor(source: Source) = "$name/${source.resources()}"

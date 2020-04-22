@@ -5,6 +5,7 @@ import com.delbel.zygote.module.content.dynamic.gradle.DomainGradleFile
 import com.delbel.zygote.module.content.dynamic.gradle.GatewayGradleFile
 import com.delbel.zygote.module.content.dynamic.gradle.PresentationGradleFile
 import com.delbel.zygote.module.Module
+import com.delbel.zygote.module.content.dynamic.SettingsFile
 import com.delbel.zygote.writer.DirectoryContainerWriter
 import com.delbel.zygote.writer.FileContentWriter
 import java.io.File
@@ -12,7 +13,7 @@ import java.nio.file.Paths
 
 fun main(args: Array<String>) {
     val feature = Feature(name = "feature", basePackage = "com.delbel.zygote")
-    val featureFile = File(root(), "feature")
+    val settings = SettingsFile()
 
     val domain = Module(
         name = "domain",
@@ -32,9 +33,13 @@ fun main(args: Array<String>) {
         innerDependencies = listOf(domain)
     )
 
-    listOf(domain, presentation, gateway).forEach { module -> module.create(
-        containerWriter = DirectoryContainerWriter(root = featureFile),
-        contentWriter = FileContentWriter(root = featureFile))
+    listOf(domain, presentation, gateway).forEach { module ->
+        module.create(
+            containerWriter = DirectoryContainerWriter(root = File(root(), "feature")),
+            contentWriter = FileContentWriter(root = File(root(), "feature"))
+        )
+
+        settings.write(writer = FileContentWriter(root = root()), module = module)
     }
 }
 
