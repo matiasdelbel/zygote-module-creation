@@ -7,7 +7,10 @@ abstract class DynamicContent {
 
     protected abstract val name: String
 
-    fun write(writer: ContentWriter, module: Module) = writer.write(targetName = name, content = module.visit(this))
+    fun write(writer: ContentWriter, module: Module) = writer.write(
+        targetName = name,
+        content = module.contentFor(file = this)
+    )
 
-    abstract fun accept(module: Module): String
+    abstract fun content(module: Module): String
 }

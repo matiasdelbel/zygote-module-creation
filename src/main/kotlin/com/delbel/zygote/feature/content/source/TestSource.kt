@@ -2,7 +2,6 @@ package com.delbel.zygote.feature.content.source
 
 import com.delbel.zygote.feature.content.dynamic.ManifestFile
 import com.delbel.zygote.feature.content.hard.MockMarkerFile
-import com.delbel.zygote.feature.module.Module
 import com.delbel.zygote.writer.ContentWriter
 
 class TestSource : Source() {
@@ -11,7 +10,7 @@ class TestSource : Source() {
 
     private val mockMarkerFile = MockMarkerFile()
 
-    override fun path(module: Module): String = "src/test/kotlin/"
+    override fun path() = "src/test/kotlin/"
 
     override fun writeCustomContent(contentWriter: ContentWriter) = mockMarkerFile.write(contentWriter)
 }

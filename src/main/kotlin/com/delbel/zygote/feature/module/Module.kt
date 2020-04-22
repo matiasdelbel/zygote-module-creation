@@ -24,17 +24,13 @@ class Module(
     private val sourceMain: MainSource = MainSource()
     private val sourceTest: TestSource = TestSource()
 
-    fun visit(file: DynamicContent): String =
-        file.accept(module = this)
+    fun contentFor(file: DynamicContent) = file.content(module = this)
 
-    fun visit(file: ManifestFile): String =
-        file.content(packageName = "$packageName.$feature.$name")
+    fun contentFor(file: ManifestFile) = file.content(packageName = "$packageName.$feature.$name")
 
-    fun visit(file: GradleFile): String =
-        file.content(innerDependencies = innerDependencies.map { "$feature:${it.name}" })
+    fun contentFor(file: GradleFile) = file.content(innerDependencies = innerDependencies.map { "$feature:${it.name}" })
 
-    fun visit(source: Source): String =
-        "${source.path(module = this)}${packageName.split(".").joinToString("/")}"
+    fun pathFor(source: Source) = "${source.path()}${packageName.split(".").joinToString("/")}"
 
     fun create(containerWriter: ContainerWriter, contentWriter: ContentWriter) {
         proGuard.write(contentWriter)

@@ -7,7 +7,7 @@ class PresentationGradleFile : GradleFile() {
 
     override val name: String = "build.gradle.kts"
 
-    override fun accept(module: Module): String = module.visit(file = this)
+    override fun content(module: Module) = module.contentFor(file = this)
 
     override fun content(innerDependencies: List<String>): String {
         val fileBuilder = StringBuilder()
