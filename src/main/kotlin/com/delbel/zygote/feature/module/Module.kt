@@ -8,19 +8,19 @@ import com.delbel.zygote.feature.module.source.SourceTest
 import com.delbel.zygote.writer.Writeable
 import com.delbel.zygote.writer.Writer
 
-abstract class Module(
+class Module(
     val feature: String,
-    val packageName: String,
     val name: String,
-    private val sourceMain: SourceMain? = null,
-    private val sourceTest: SourceTest? = null,
-    private val dependencies: List<Module> = emptyList()
+    val packageName: String,
+    private val buildGradle: DynamicContent,
+    private val dependencies: List<Module> = emptyList(),
+
+    private val sourceMain: SourceMain? = SourceMain(),
+    private val sourceTest: SourceTest? = SourceTest()
 ) : Writeable {
 
     private val proGuard = ProGuardFile()
     private val gitIgnore = GitIgnoreFile()
-
-    abstract val buildGradle: DynamicContent
 
     fun visit(file: DynamicContent): String = file.accept(module = this)
 
@@ -39,10 +39,10 @@ abstract class Module(
     override fun <T> create(writer: Writer<T>) {
         val (moduleWriter, staticWriter) = writer.visit(module = this)
 
-        buildGradle.write(staticWriter, this)
-
         proGuard.write(staticWriter)
         gitIgnore.write(staticWriter)
+
+        buildGradle.write(staticWriter, this)
 
         sourceMain?.create(moduleWriter)
         sourceTest?.create(moduleWriter)
