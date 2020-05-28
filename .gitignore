@@ -8,6 +8,7 @@ out/
 *.log
 
 /.idea
+/.gradle
 
 
 # MAC Files

@@ -1,7 +1,7 @@
 package com.delbel.zygote.module.content.dynamic
 
+import org.junit.Assert.assertEquals
 import org.junit.Test
-import kotlin.test.assertEquals
 
 class ManifestFileTest {
 
