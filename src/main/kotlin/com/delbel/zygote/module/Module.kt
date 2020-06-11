@@ -41,7 +41,8 @@ class Module(
 
     fun relativePathFor(file: SettingsFile) = file.name
 
-    fun relativePathFor(source: Source) = "$name/${source.src()}/kotlin/${feature.basePackage.split(".").joinToString("/")}/$name"
+    fun relativePathFor(source: Source) =
+            "$name/${source.src()}/kotlin/${feature.basePackage.split(".").joinToString("/")}/${feature.name}/$name"
 
     fun contentFor(file: DynamicContent) = file.content(module = this)
 
