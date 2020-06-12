@@ -48,9 +48,9 @@ class Module(
 
     fun contentFor(file: ManifestFile) = file.content(packageName = "${feature.basePackage}.${feature.name}.$name")
 
-    fun contentFor(file: GradleFile) = file.content(innerDependencies = innerDependencies.map { ":${feature.name}:$name" })
+    fun contentFor(file: GradleFile) = file.content(innerDependencies = innerDependencies.map { ":${feature.name}:${it.name}" })
 
-    fun contentFor(file: SettingsFile) = file.content(moduleName = ":${feature.name}:$name", modulePath = "${feature.name}/$name")
+    fun contentFor(file: SettingsFile) = file.content(moduleName = ":${feature.name}:$name")
 
     fun create(containerWriter: ContainerWriter, contentWriter: ContentWriter) {
         containerWriter.create(name)

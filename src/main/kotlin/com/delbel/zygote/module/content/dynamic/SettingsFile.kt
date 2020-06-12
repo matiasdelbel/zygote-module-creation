@@ -17,12 +17,11 @@ class SettingsFile : DynamicContent() {
 
     override fun content(module: Module) = module.contentFor(file = this)
 
-    fun content(moduleName: String, modulePath: String): String {
+    fun content(moduleName: String): String {
         val fileBuilder = StringBuilder()
 
         fileBuilder.appendln()
         fileBuilder.appendln("include(\"$moduleName\")")
-        fileBuilder.appendln("project(path = \"$moduleName\").projectDir = File(rootDir, \"$modulePath\")")
 
         return fileBuilder.toString()
     }

@@ -14,7 +14,7 @@ class FeatureTest {
     @Test
     fun `create domain should create files`() {
         val stringBuffer = StringBuffer()
-        val feature = Feature(name = "> feature", basePackage = "com.delbel.zygote")
+        val feature = Feature(name = "feature", basePackage = "com.delbel.zygote")
         val domain = Module(
             name = "domain",
             feature = feature,
@@ -32,7 +32,7 @@ class FeatureTest {
     @Test
     fun `create domain and presentation should create files`() {
         val stringBuffer = StringBuffer()
-        val feature = Feature(name = "> feature", basePackage = "com.delbel.zygote")
+        val feature = Feature(name = "feature", basePackage = "com.delbel.zygote")
         val domain = Module(
             name = "domain",
             feature = feature,
@@ -57,7 +57,7 @@ class FeatureTest {
     @Test
     fun `create domain and presentation and gateway should create files`() {
         val stringBuffer = StringBuffer()
-        val feature = Feature(name = "> feature", basePackage = "com.delbel.zygote")
+        val feature = Feature(name = "feature", basePackage = "com.delbel.zygote")
         val domain = Module(
             name = "domain",
             feature = feature,
@@ -87,7 +87,7 @@ class FeatureTest {
     @Test
     fun `create domain and presentation and gateway and editing setings should create files`() {
         val stringBuffer = StringBuffer()
-        val feature = Feature(name = "> feature", basePackage = "com.delbel.zygote")
+        val feature = Feature(name = "feature", basePackage = "com.delbel.zygote")
         val domain = Module(
             name = "domain",
             feature = feature,

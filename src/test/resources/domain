@@ -1,8 +1,8 @@
 DIRECTORY: > /domain
  NEW file: > /domain/proguard-rules.pro (source: /hard/proguard-rules.pro)
- NEW file: > /domain/.gitignore (source: /hard/.gitignore)
+ NEW file: > /domain/.gitignore (source: /hard/gitignore)
  NEW file: > /domain/build.gradle.kts (dynamic content)
-DIRECTORY: > /domain/src/main/kotlin/com/delbel/zygote/domain
+DIRECTORY: > /domain/src/main/kotlin/com/delbel/zygote/feature/domain
  NEW file: > /domain/src/main/AndroidManifest.xml (dynamic content)
-DIRECTORY: > /domain/src/test/kotlin/com/delbel/zygote/domain
+DIRECTORY: > /domain/src/test/kotlin/com/delbel/zygote/feature/domain
  NEW file: > /domain/src/test/resources/mockito-extensions/org.mockito.plugins.MockMaker (source: /hard/org.mockito.plugins.MockMaker)
